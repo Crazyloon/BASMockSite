@@ -1,0 +1,32 @@
+{
+  "siteName": {
+    "value": "BASMockSite"
+  },
+  "hostingPlanName": {
+    "value": "BASMockService"
+  },
+  "siteLocation": {
+    "value": "West US"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "serverName": {
+    "value": "tqen48q7i4"
+  },
+  "serverLocation": {
+    "value": "West US"
+  },
+  "administratorLogin": {
+    "value": "russdow"
+  },
+  "administratorLoginPassword": {
+    "value": "water11!"
+  },
+  "databaseName": {
+    "value": "BASMockSite_db"
+  }
+}
