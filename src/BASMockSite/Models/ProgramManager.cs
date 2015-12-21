@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BASMockSite.Models
 {
+    // A program manager is the person in charge of each degree-page of the degree they manage.
+    // they will have access to edit details from the Degree model and possibly the School model
     public class ProgramManager
     {
         [Key]
@@ -20,8 +22,6 @@ namespace BASMockSite.Models
 
 
         public virtual School School { get; set; }
-
         public virtual ICollection<Degree> Degree { get; set; }
-
     }
 }

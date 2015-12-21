@@ -16,12 +16,18 @@ namespace BASMockSite.Models
 
         public string Description { get; set; }
 
+        // Like 90 Credits, 6 quarters
+        public string ProgramDuration { get; set; }
 
+        public bool Accreditated { get; set; }
 
+        [Required]
+        [DataType(DataType.Url)]
+        public string ProgramURL { get; set; }
         //Nav props
 
         public virtual School School { get; set; }
-        public virtual ICollection<ProgramEntryDate> EntryDates { get; set; }
+        public virtual ProgramManager ProgramManager { get; set; }
         public virtual ICollection<CourseModel> CourseModels { get; set; }
     }
 }

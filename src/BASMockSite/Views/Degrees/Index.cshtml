@@ -12,7 +12,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Accreditated)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramURL)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -23,7 +32,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Accreditated)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramURL)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)

@@ -19,5 +19,8 @@ namespace BASMockSite.Models
         }
         public DbSet<School> School { get; set; }
         public DbSet<Degree> Degree { get; set; }
+        public DbSet<ProgramEntry> ProgramEntry { get; set; }
+        public DbSet<ProgramManager> ProgramManager { get; set; }
+        public DbSet<CourseModel> CourseModel { get; set; }
     }
 }

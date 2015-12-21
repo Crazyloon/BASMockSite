@@ -13,13 +13,15 @@ namespace BASMockSite.Models
 
         public ModelType Structure { get; set; }
         
+        public ProgramEntry EntryStructure { get; set; }
+
         public virtual Degree Degree { get; set; }
     }
 
     public enum ModelType
     {
-        Day,
-        Night,
+        Daytime,
+        Evening,
         Online,
         Hybrid
     }

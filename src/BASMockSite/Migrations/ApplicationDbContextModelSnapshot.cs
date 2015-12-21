@@ -83,9 +83,16 @@ namespace BASMockSite.Migrations
                     b.Property<int>("DegreeID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Accreditated");
+
                     b.Property<string>("Description");
 
+                    b.Property<string>("ProgramDuration");
+
                     b.Property<int?>("ProgramManagerManagerID");
+
+                    b.Property<string>("ProgramURL")
+                        .IsRequired();
 
                     b.Property<int?>("SchoolSchoolID");
 
@@ -95,14 +102,15 @@ namespace BASMockSite.Migrations
                     b.HasKey("DegreeID");
                 });
 
-            modelBuilder.Entity("BASMockSite.Models.ProgramEntryDate", b =>
+            modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
                 {
-                    b.Property<int>("EntryDateID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("EntryDateID");
 
-                    b.Property<int?>("DegreeDegreeID");
+                    b.Property<DateTime>("ApplicationDeadline");
 
-                    b.Property<DateTime>("EntryDate");
+                    b.Property<string>("EntrySummary");
+
+                    b.Property<int>("Season");
 
                     b.HasKey("EntryDateID");
                 });
@@ -129,15 +137,34 @@ namespace BASMockSite.Migrations
                     b.Property<int>("SchoolID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
                     b.Property<string>("County")
                         .IsRequired();
 
-                    b.Property<DateTime>("EntryDate");
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("HomeWebAddress")
+                        .IsRequired();
+
+                    b.Property<string>("MainPhone")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<string>("State")
+                        .IsRequired();
+
                     b.Property<decimal>("Tuition");
+
+                    b.Property<string>("Zip")
+                        .IsRequired();
 
                     b.HasKey("SchoolID");
                 });
@@ -242,11 +269,11 @@ namespace BASMockSite.Migrations
                         .HasForeignKey("SchoolSchoolID");
                 });
 
-            modelBuilder.Entity("BASMockSite.Models.ProgramEntryDate", b =>
+            modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
                 {
-                    b.HasOne("BASMockSite.Models.Degree")
-                        .WithMany()
-                        .HasForeignKey("DegreeDegreeID");
+                    b.HasOne("BASMockSite.Models.CourseModel")
+                        .WithOne()
+                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryDateID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>

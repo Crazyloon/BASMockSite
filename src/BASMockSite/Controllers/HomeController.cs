@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using BASMockSite.ViewModels.Search;
 
 namespace BASMockSite.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -31,5 +32,22 @@ namespace BASMockSite.Controllers
         {
             return View();
         }
+
+        //[HttpGet]
+        //public IActionResult Search()
+        //{
+        //    var qry = new SearchViewModel();
+        //    qry.
+        //    return View(new ViewModels.Search.Search());
+        //}
+
+        //[HttpPost]
+        //public IActionResult Search(Search query)
+        //{
+        //    if (query.City != null)
+        //    {
+
+        //    }
+        //}
     }
 }
