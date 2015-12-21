@@ -8,8 +8,8 @@ using BASMockSite.Models;
 namespace BASMockSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20151221030645_Initial")]
-    partial class Initial
+    [Migration("20151221055917_ModelUpdate0.01")]
+    partial class ModelUpdate001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,8 +84,6 @@ namespace BASMockSite.Migrations
                     b.Property<int>("DegreeID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Accredited");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("ProgramDuration");
@@ -105,7 +103,7 @@ namespace BASMockSite.Migrations
 
             modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
                 {
-                    b.Property<int>("EntryDateID");
+                    b.Property<int>("EntryID");
 
                     b.Property<DateTime>("ApplicationDeadline");
 
@@ -113,7 +111,7 @@ namespace BASMockSite.Migrations
 
                     b.Property<int>("Season");
 
-                    b.HasKey("EntryDateID");
+                    b.HasKey("EntryID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>
@@ -137,6 +135,8 @@ namespace BASMockSite.Migrations
                 {
                     b.Property<int>("SchoolID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Accredited");
 
                     b.Property<string>("Address")
                         .IsRequired();
@@ -274,7 +274,7 @@ namespace BASMockSite.Migrations
                 {
                     b.HasOne("BASMockSite.Models.CourseModel")
                         .WithOne()
-                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryDateID");
+                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>

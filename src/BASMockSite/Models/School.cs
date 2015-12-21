@@ -11,6 +11,8 @@ namespace BASMockSite.Models
         [Key]
         public int SchoolID { get; set; }
 
+        public bool Accredited { get; set; }
+
         [Required]
         public string Name { get; set; }
 

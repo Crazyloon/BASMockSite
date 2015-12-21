@@ -9,7 +9,7 @@ namespace BASMockSite.Models
     public class ProgramEntry
     {
         [Key]
-        public int EntryDateID { get; set; }        
+        public int EntryID { get; set; }        
         
         [Display(Name = "Application Deadline")]
         public DateTime ApplicationDeadline { get; set; }

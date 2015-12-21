@@ -19,8 +19,6 @@ namespace BASMockSite.Models
         // Like 90 Credits, 6 quarters
         public string ProgramDuration { get; set; }
 
-        public bool Accreditated { get; set; }
-
         [Required]
         [DataType(DataType.Url)]
         public string ProgramURL { get; set; }

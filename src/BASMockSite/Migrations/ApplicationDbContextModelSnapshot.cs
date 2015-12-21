@@ -83,8 +83,6 @@ namespace BASMockSite.Migrations
                     b.Property<int>("DegreeID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Accreditated");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("ProgramDuration");
@@ -104,7 +102,7 @@ namespace BASMockSite.Migrations
 
             modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
                 {
-                    b.Property<int>("EntryDateID");
+                    b.Property<int>("EntryID");
 
                     b.Property<DateTime>("ApplicationDeadline");
 
@@ -112,7 +110,7 @@ namespace BASMockSite.Migrations
 
                     b.Property<int>("Season");
 
-                    b.HasKey("EntryDateID");
+                    b.HasKey("EntryID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>
@@ -136,6 +134,8 @@ namespace BASMockSite.Migrations
                 {
                     b.Property<int>("SchoolID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Accredited");
 
                     b.Property<string>("Address")
                         .IsRequired();
@@ -273,7 +273,7 @@ namespace BASMockSite.Migrations
                 {
                     b.HasOne("BASMockSite.Models.CourseModel")
                         .WithOne()
-                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryDateID");
+                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>

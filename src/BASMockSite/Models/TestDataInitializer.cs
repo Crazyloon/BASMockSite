@@ -29,6 +29,7 @@ namespace BASMockSite.Models
                         Description = "Renton Technical College, also known as RTC. It is a public two-year institution located in the Renton Highlands of Renton, Washington within the Seattle metropolitan area.",
                         County = "King",
                         Tuition = 14500m,
+                        Accredited = true,
                         Degrees = new List<Degree>
                         {
                             new Degree
@@ -36,7 +37,6 @@ namespace BASMockSite.Models
                                 Title = "Application Development",
                                 Description = "The Bachelor of Applied Science (BAS) in Application Development program at Renton Technical College is designed for students who are ready to take the next step toward a bachelor’s degree. The program includes technical courses in: data analysis, application and software development, programming, and project management. In addition to gaining a strong technical foundation, our program addresses the science, communications, and quantitative reasoning needed to work in this growing field. Students learn to work in teams, manage IT projects, and prepare software documentation. Graduates prepare for careers in a variety of occupations including: software development, computer systems analysis, web development, database analysis and mobile application development.",
                                 ProgramDuration = "90 Credits, 6 Quarters",
-                                Accreditated = true,
                                 ProgramURL = "http://www.rtc.edu/appdev",
                                 CourseModels = new List<CourseModel>
                                 {
@@ -78,6 +78,7 @@ namespace BASMockSite.Models
                         Description = "Bellevue College is an open-access, community-based, public institution of higher education located in Bellevue, Washington, a city on the Eastside of Lake Washington, near Seattle.",
                         County = "King",
                         Tuition = 15000m,
+                        Accredited = true,
                         Degrees = new List<Degree>
                         {
                             new Degree
@@ -85,7 +86,6 @@ namespace BASMockSite.Models
                                 Title = "Data Analytics",
                                 Description = "The Bachelor of Applied Science in Data Analytics provides graduates with the skills and knowledge needed for employment in the rapidly emerging field of data analytics, which comprises analyzing and interpreting the large datasets now available in a wide range of organizations and industries. Modern data analytics brings together tools and techniques from business, communication, graphic arts, information technology and statistics to collect, mine, interpret and represent large datasets to illustrate concepts and inform decisions.",
                                 ProgramDuration = "90 Credits, 6 Quarters",
-                                Accreditated = true,
                                 ProgramURL = "http://www.bellevuecollege.edu/programs/degrees/bachelor/da/",
                                 CourseModels = new List<CourseModel>
                                 {
@@ -122,6 +122,7 @@ namespace BASMockSite.Models
                         Description = "Green River College is a community college located in Auburn, Washington. It has a student body of approximately 10,000.",
                         County = "King",
                         Tuition = 15400m,
+                        Accredited = true,
                         Degrees = new List<Degree>
                         {
                             new Degree
@@ -129,7 +130,6 @@ namespace BASMockSite.Models
                                 Title = "Network Administration and Security",
                                 Description = "The bachelor's degree program in Network Administration and Security is designed to prepare students for employment as network and systems administrators, information security analysts, or computer support specialists.",
                                 ProgramDuration = "90 Credits, 6 Quarters",
-                                Accreditated = true,
                                 ProgramURL = "http://www.greenriver.edu/academics/areas-of-study/bas-programs/network-administration-and-security.htm",
                                 CourseModels = new List<CourseModel>
                                 {
@@ -175,6 +175,7 @@ namespace BASMockSite.Models
                         Description = "Highline College is an institution of higher education located in Des Moines, Washington, south of Seattle, Washington. Highline was founded in 1961 as the first community college in King County.",
                         County = "King",
                         Tuition = 15000m,
+                        Accredited = true,
                         Degrees = new List<Degree>
                         {
                             new Degree
@@ -182,7 +183,6 @@ namespace BASMockSite.Models
                                 Title = "Cybersecurity and Forensics",
                                 Description = "In Highline's Computer Science and Computer Information Systems Department, you can prepare for a variety of information technology–related careers. Offering advanced topics and training, the department offers you the opportunity to become a computer programmer, network specialist, website/database developer, or data recovery and computer forensics specialist.",
                                 ProgramDuration = "90 Credits, 6 Quarters",
-                                Accreditated = true,
                                 ProgramURL = "http://www.highline.edu/bas/cybersecurity/",
                                 CourseModels = new List<CourseModel>
                                 {
