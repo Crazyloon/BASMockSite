@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace BASMockSite.Models
+namespace BASMockSite.ViewModels.Degree
 {
-    public class Degree
+    public class SingleDegreeViewModel
     {
         [Key]
         public int DegreeID { get; set; }
@@ -17,17 +17,22 @@ namespace BASMockSite.Models
         [Required]
         public string Description { get; set; }
 
-        // Like 90 Credits, 6 quarters
         [Required]
         public string ProgramDuration { get; set; }
 
         [Required]
         [DataType(DataType.Url)]
         public string ProgramURL { get; set; }
-        //Nav props
 
-        public virtual School School { get; set; }
-        public virtual ProgramManager ProgramManager { get; set; }
-        public virtual ICollection<CourseModel> CourseModels { get; set; }
+        [Required]
+        public string SchoolName { get; set; }
+
+        [Required]
+        public string ProgramManagerName { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]
+        public string ProgramManagerEmail { get; set; }
     }
 }

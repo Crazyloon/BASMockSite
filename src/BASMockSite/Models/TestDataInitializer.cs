@@ -43,26 +43,31 @@ namespace BASMockSite.Models
                                     new CourseModel
                                     {
                                         Structure = ModelType.Evening,
-                                        EntryStructure = new ProgramEntry
+                                        EntryStructure = new List<ProgramEntry>
                                         {
-                                            ApplicationDeadline = new DateTime(2016, 4, 1),
-                                            EntrySummary = "Admission is selective. Applications are due April 1st for the following fall entry. Applicants are notified by mail of a decision between late April and early May.",
-                                            Season = EntrySeason.Fall
+                                            new ProgramEntry
+                                            {
+                                                ApplicationDeadline = new DateTime(2016, 4, 1),
+                                                EntrySummary = "Admission is selective. Applications are due April 1st for the following fall entry. Applicants are notified by mail of a decision between late April and early May.",
+                                                Season = EntrySeason.Fall
+                                            }
                                         }
                                     },
                                     new CourseModel
                                     {
                                         Structure = ModelType.Hybrid
                                     }
-                                },
-                                ProgramManager = new ProgramManager
-                                {
-                                    Name = "Stefanie McIrvin",
-                                    Email = "smcirvin@rtc.edu"
                                 }
                             }
+                        },
+                        ProgramManagers = new List<ProgramManager>
+                        {
+                            new ProgramManager
+                            {
+                                Name = "Stefanie McIrvin",
+                                Email = "smcirvin@rtc.edu"
+                            }
                         }
-
                     }).Entity;
 
                 var bcc = context.School.Add(
@@ -92,18 +97,24 @@ namespace BASMockSite.Models
                                     new CourseModel
                                     {
                                         Structure = ModelType.Daytime,
-                                        EntryStructure = new ProgramEntry
+                                        EntryStructure = new List<ProgramEntry>
                                         {
-                                            EntrySummary = "Applications are available beginning each January for the following fall entry.",
-                                            Season = EntrySeason.Fall
+                                            new ProgramEntry
+                                            {
+                                                EntrySummary = "Applications are available beginning each January for the following fall entry.",
+                                                Season = EntrySeason.Fall
+                                            }
                                         }
                                     }
-                                },
-                                ProgramManager = new ProgramManager
-                                {
-                                    Name = "Shanon Reedy",
-                                    Email = "shanon.reedy@bellevuecollege.edu"
                                 }
+                            }
+                        },
+                        ProgramManagers = new List<ProgramManager>
+                        {
+                            new ProgramManager
+                            {
+                                Name = "Shanon Reedy",
+                                Email = "shanon.reedy@bellevuecollege.edu"
                             }
                         }
 
@@ -136,27 +147,36 @@ namespace BASMockSite.Models
                                     new CourseModel
                                     {
                                         Structure = ModelType.Daytime,
-                                        EntryStructure = new ProgramEntry
+                                        EntryStructure = new List<ProgramEntry>
                                         {
-                                            EntrySummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
-                                            Season = EntrySeason.Fall
+                                            new ProgramEntry
+                                            {
+                                                EntrySummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
+                                                Season = EntrySeason.Fall
+                                            }
                                         }
                                     },
                                     new CourseModel
                                     {
                                         Structure = ModelType.Evening,
-                                        EntryStructure = new ProgramEntry
+                                        EntryStructure = new List<ProgramEntry>
                                         {
-                                            EntrySummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
-                                            Season = EntrySeason.Winter
+                                            new ProgramEntry
+                                            {
+                                                EntrySummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
+                                                Season = EntrySeason.Winter
+                                            }
                                         }
                                     }
-                                },
-                                ProgramManager = new ProgramManager
-                                {
-                                    Name = "Sheila Capps",
-                                    Email = "scapps@greenriver.edu"
                                 }
+                            }
+                        },
+                        ProgramManagers = new List<ProgramManager>
+                        {
+                            new ProgramManager
+                            {
+                                Name = "Sheila Capps",
+                                Email = "scapps@greenriver.edu"
                             }
                         }
 
@@ -189,29 +209,38 @@ namespace BASMockSite.Models
                                     new CourseModel
                                     {
                                         Structure = ModelType.Daytime,
-                                        EntryStructure = new ProgramEntry
+                                        EntryStructure = new List<ProgramEntry>
                                         {
-                                            ApplicationDeadline = new DateTime(2016, 6, 30),
-                                            EntrySummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
-                                            Season = EntrySeason.Fall
+                                            new ProgramEntry
+                                            {
+                                                ApplicationDeadline = new DateTime(2016, 6, 30),
+                                                EntrySummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
+                                                Season = EntrySeason.Fall
+                                            }
                                         }
                                     },
                                     new CourseModel
                                     {
                                         Structure = ModelType.Daytime,
-                                        EntryStructure = new ProgramEntry
+                                        EntryStructure = new List<ProgramEntry>
                                         {
-                                            ApplicationDeadline = new DateTime(2016, 6, 30),
-                                            EntrySummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
-                                            Season = EntrySeason.Spring
+                                            new ProgramEntry
+                                            {
+                                                ApplicationDeadline = new DateTime(2016, 6, 30),
+                                                EntrySummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
+                                                Season = EntrySeason.Spring
+                                            }
                                         }
                                     }
-                                },
-                                ProgramManager = new ProgramManager
-                                {
-                                    Name = "Tanya Powers",
-                                    Email = "tpowers@highline.edu"
                                 }
+                            }
+                        },
+                        ProgramManagers = new List<ProgramManager>
+                        {
+                            new ProgramManager
+                            {
+                                Name = "Tanya Powers",
+                                Email = "tpowers@highline.edu"
                             }
                         }
 

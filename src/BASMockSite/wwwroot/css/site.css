@@ -45,6 +45,30 @@ textarea {
     }
 }
 
+.degree-container{
+    border: 2px solid black;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+@media (min-width: 1200px){
+    .degree-container{width:49.1%;}
+}
+
+.degree-titlebar{
+    border: 1px solid red;
+}
+
+.degree-summary{
+    border: 1px solid green;
+}
+
+.degree-details{
+    border: 1px solid blue;
+}
+
 /*??????? DEV TESTING CSS ???????*/
 /*div{border:1px solid black;}*/
 

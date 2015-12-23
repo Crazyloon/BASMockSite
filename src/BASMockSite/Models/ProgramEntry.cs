@@ -20,13 +20,4 @@ namespace BASMockSite.Models
 
         public virtual CourseModel CourseModel { get; set; }
     }
-
-    public enum EntrySeason
-    {
-        Winter,
-        Spring,
-        Summer,
-        Fall,
-        Always
-    }
 }

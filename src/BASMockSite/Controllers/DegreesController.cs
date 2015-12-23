@@ -3,6 +3,8 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using BASMockSite.Models;
+using System.Collections.Generic;
+
 
 namespace BASMockSite.Controllers
 {
@@ -18,7 +20,16 @@ namespace BASMockSite.Controllers
         // GET: Degrees
         public IActionResult Index()
         {
-            return View(_context.Degree.ToList());
+            var degrees = new BASMockSite.ViewModels.Degree.DegreesListViewModel();
+
+            degrees.Degrees = _context.Degree.ToList();
+            degrees.ProgramEntrys = _context.ProgramEntry.ToList();
+            degrees.ProgramManagers = _context.ProgramManager.ToList();
+            degrees.CourseModels = _context.CourseModel.ToList();
+            degrees.Schools= _context.School.ToList();
+            
+
+            return View(degrees);
         }
 
         // GET: Degrees/Details/5
@@ -115,6 +126,31 @@ namespace BASMockSite.Controllers
             _context.Degree.Remove(degree);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        //public ActionResult _DegreePartialOrig()
+        //{
+        //    List<Degree> degrees;
+        //    degrees = _context.Degree.Include(d => d.CourseModels.Select(cm => cm.EntryStructure.Select(es => es.EntrySummary))).ToList();
+        //    ViewBag.DegreeCourseModels = _context.CourseModel.ToList();
+        //    ViewBag.DegreeProgramEntry = _context.ProgramEntry.ToList();
+
+        //    return PartialView("_DegreePartial", degrees);
+        //}
+
+        public ActionResult _DegreePartial()
+        {
+            var degrees = new BASMockSite.ViewModels.Degree.DegreesListViewModel();
+            for (int i = 0; i < _context.Degree.Count(); i++)
+            {
+                degrees.Degrees = _context.Degree.ToList();
+                degrees.ProgramEntrys = _context.ProgramEntry.ToList();
+                degrees.ProgramManagers = _context.ProgramManager.ToList();
+                degrees.CourseModels = _context.CourseModel.ToList();
+            }
+
+            return PartialView("_DegreePartial", degrees);
         }
     }
 }

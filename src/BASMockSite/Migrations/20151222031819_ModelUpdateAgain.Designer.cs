@@ -8,8 +8,8 @@ using BASMockSite.Models;
 namespace BASMockSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20151221030645_Initial")]
-    partial class Initial
+    [Migration("20151222031819_ModelUpdateAgain")]
+    partial class ModelUpdateAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,11 +84,11 @@ namespace BASMockSite.Migrations
                     b.Property<int>("DegreeID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Accredited");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Description");
-
-                    b.Property<string>("ProgramDuration");
+                    b.Property<string>("ProgramDuration")
+                        .IsRequired();
 
                     b.Property<int?>("ProgramManagerManagerID");
 
@@ -105,7 +105,7 @@ namespace BASMockSite.Migrations
 
             modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
                 {
-                    b.Property<int>("EntryDateID");
+                    b.Property<int>("EntryID");
 
                     b.Property<DateTime>("ApplicationDeadline");
 
@@ -113,7 +113,7 @@ namespace BASMockSite.Migrations
 
                     b.Property<int>("Season");
 
-                    b.HasKey("EntryDateID");
+                    b.HasKey("EntryID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>
@@ -126,7 +126,7 @@ namespace BASMockSite.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 64);
+                        .HasAnnotation("MaxLength", 128);
 
                     b.Property<int?>("SchoolSchoolID");
 
@@ -137,6 +137,8 @@ namespace BASMockSite.Migrations
                 {
                     b.Property<int>("SchoolID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Accredited");
 
                     b.Property<string>("Address")
                         .IsRequired();
@@ -274,7 +276,7 @@ namespace BASMockSite.Migrations
                 {
                     b.HasOne("BASMockSite.Models.CourseModel")
                         .WithOne()
-                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryDateID");
+                        .HasForeignKey("BASMockSite.Models.ProgramEntry", "EntryID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>

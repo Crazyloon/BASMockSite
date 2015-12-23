@@ -1,15 +1,22 @@
-@model IEnumerable<BASMockSite.Models.Degree>
+@model BASMockSite.ViewModels.Degree.DegreesListViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "View Degrees";
 }
 
-<h2>Index</h2>
+<h2>Browse BAS Degrees</h2>
 
 <p>
+    This will be removed when a BAS Manager Content Update System is implemented
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+
+<div class="col-xs-12">
+    @{ 
+        await Html.RenderPartialAsync("_DegreePartial", Model);
+    }
+</div>
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -47,4 +54,4 @@
         </td>
     </tr>
 }
-</table>
+</table>*@

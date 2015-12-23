@@ -40,6 +40,7 @@ namespace BASMockSite.Migrations
                 {
                     SchoolID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Accredited = table.Column<bool>(nullable: false),
                     Address = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
                     County = table.Column<string>(nullable: false),
@@ -176,7 +177,6 @@ namespace BASMockSite.Migrations
                 {
                     DegreeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Accreditated = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ProgramDuration = table.Column<string>(nullable: true),
                     ProgramManagerManagerID = table.Column<int>(nullable: true),
@@ -223,17 +223,17 @@ namespace BASMockSite.Migrations
                 name: "ProgramEntry",
                 columns: table => new
                 {
-                    EntryDateID = table.Column<int>(nullable: false),
+                    EntryID = table.Column<int>(nullable: false),
                     ApplicationDeadline = table.Column<DateTime>(nullable: false),
                     EntrySummary = table.Column<string>(nullable: true),
                     Season = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProgramEntry", x => x.EntryDateID);
+                    table.PrimaryKey("PK_ProgramEntry", x => x.EntryID);
                     table.ForeignKey(
-                        name: "FK_ProgramEntry_CourseModel_EntryDateID",
-                        column: x => x.EntryDateID,
+                        name: "FK_ProgramEntry_CourseModel_EntryID",
+                        column: x => x.EntryID,
                         principalTable: "CourseModel",
                         principalColumn: "ModelID",
                         onDelete: ReferentialAction.Cascade);

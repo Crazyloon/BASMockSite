@@ -8,8 +8,8 @@ using BASMockSite.Models;
 namespace BASMockSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20151221055917_ModelUpdate0.01")]
-    partial class ModelUpdate001
+    [Migration("20151221061825_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -12,14 +12,13 @@ namespace BASMockSite.Models
         public int ManagerID { get; set; }
 
         [Required]
-        [StringLength(64)]
+        [StringLength(128)]
         public string Name { get; set; }
 
         [Display(Name = "Email Address")]
-        [Required(ErrorMessage = "Email Address is a required field")]
+        [Required(ErrorMessage = "Email address is a required field")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
-
 
         public virtual School School { get; set; }
         public virtual ICollection<Degree> Degree { get; set; }
