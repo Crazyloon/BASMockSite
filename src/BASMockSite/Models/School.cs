@@ -31,7 +31,7 @@ namespace BASMockSite.Models
         public string Zip { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Enter a number like (000)000-0000")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Enter a number like 1112223333")]
         public string MainPhone { get; set; }
 
         [Required]
@@ -47,7 +47,11 @@ namespace BASMockSite.Models
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Tuition { get; set; }
+
+        public byte[] Logo { get; set; }
+
+        // Foreign tables
+        //public ICollection<ProgramEntry> ProgramEntries { get; set; }
         public ICollection<Degree> Degrees { get; set; }
-        public ICollection<ProgramManager> ProgramManagers { get; set; }
     }
 }

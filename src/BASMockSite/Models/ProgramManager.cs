@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BASMockSite.Models
 {
@@ -8,8 +9,12 @@ namespace BASMockSite.Models
     // they will have access to edit details from the Degree model and possibly the School model
     public class ProgramManager
     {
+        //PK
         [Key]
         public int ManagerID { get; set; }
+        //FK
+        //[ForeignKey("School")]
+        //public int SchoolID { get; set; }
 
         [Required]
         [StringLength(128)]
@@ -20,7 +25,7 @@ namespace BASMockSite.Models
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
-        public virtual School School { get; set; }
+        //public virtual School School { get; set; }
         public virtual ICollection<Degree> Degree { get; set; }
     }
 }

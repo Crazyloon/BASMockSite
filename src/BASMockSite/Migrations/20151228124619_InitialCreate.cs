@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace BASMockSite.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,19 @@ namespace BASMockSite.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ApplicationUser", x => x.Id);
+                });
+            migrationBuilder.CreateTable(
+                name: "ProgramManager",
+                columns: table => new
+                {
+                    ManagerID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramManager", x => x.ManagerID);
                 });
             migrationBuilder.CreateTable(
                 name: "School",
@@ -109,24 +122,34 @@ namespace BASMockSite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
-                name: "ProgramManager",
+                name: "Degree",
                 columns: table => new
                 {
-                    ManagerID = table.Column<int>(nullable: false)
+                    DegreeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(nullable: false),
+                    AdmissionsSummary = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    SchoolSchoolID = table.Column<int>(nullable: true)
+                    ProgramManagerID = table.Column<int>(nullable: false),
+                    ProgramURL = table.Column<string>(nullable: false),
+                    RequiredCredits = table.Column<int>(nullable: false),
+                    SchoolID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProgramManager", x => x.ManagerID);
+                    table.PrimaryKey("PK_Degree", x => x.DegreeID);
                     table.ForeignKey(
-                        name: "FK_ProgramManager_School_SchoolSchoolID",
-                        column: x => x.SchoolSchoolID,
+                        name: "FK_Degree_ProgramManager_ProgramManagerID",
+                        column: x => x.ProgramManagerID,
+                        principalTable: "ProgramManager",
+                        principalColumn: "ManagerID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Degree_School_SchoolID",
+                        column: x => x.SchoolID,
                         principalTable: "School",
                         principalColumn: "SchoolID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -172,70 +195,43 @@ namespace BASMockSite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
-                name: "Degree",
-                columns: table => new
-                {
-                    DegreeID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true),
-                    ProgramDuration = table.Column<string>(nullable: true),
-                    ProgramManagerManagerID = table.Column<int>(nullable: true),
-                    ProgramURL = table.Column<string>(nullable: false),
-                    SchoolSchoolID = table.Column<int>(nullable: true),
-                    Title = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Degree", x => x.DegreeID);
-                    table.ForeignKey(
-                        name: "FK_Degree_ProgramManager_ProgramManagerManagerID",
-                        column: x => x.ProgramManagerManagerID,
-                        principalTable: "ProgramManager",
-                        principalColumn: "ManagerID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Degree_School_SchoolSchoolID",
-                        column: x => x.SchoolSchoolID,
-                        principalTable: "School",
-                        principalColumn: "SchoolID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-            migrationBuilder.CreateTable(
-                name: "CourseModel",
-                columns: table => new
-                {
-                    ModelID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DegreeDegreeID = table.Column<int>(nullable: true),
-                    Structure = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseModel", x => x.ModelID);
-                    table.ForeignKey(
-                        name: "FK_CourseModel_Degree_DegreeDegreeID",
-                        column: x => x.DegreeDegreeID,
-                        principalTable: "Degree",
-                        principalColumn: "DegreeID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-            migrationBuilder.CreateTable(
                 name: "ProgramEntry",
                 columns: table => new
                 {
-                    EntryID = table.Column<int>(nullable: false),
+                    EntryID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ApplicationDeadline = table.Column<DateTime>(nullable: false),
-                    EntrySummary = table.Column<string>(nullable: true),
+                    DegreeID = table.Column<int>(nullable: false),
                     Season = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProgramEntry", x => x.EntryID);
                     table.ForeignKey(
-                        name: "FK_ProgramEntry_CourseModel_EntryID",
-                        column: x => x.EntryID,
-                        principalTable: "CourseModel",
-                        principalColumn: "ModelID",
+                        name: "FK_ProgramEntry_Degree_DegreeID",
+                        column: x => x.DegreeID,
+                        principalTable: "Degree",
+                        principalColumn: "DegreeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+            migrationBuilder.CreateTable(
+                name: "ProgramStructure",
+                columns: table => new
+                {
+                    ProgramStructureID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProgramDuration = table.Column<string>(nullable: false),
+                    ProgramEntrylID = table.Column<int>(nullable: false),
+                    Structure = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramStructure", x => x.ProgramStructureID);
+                    table.ForeignKey(
+                        name: "FK_ProgramStructure_ProgramEntry_ProgramEntrylID",
+                        column: x => x.ProgramEntrylID,
+                        principalTable: "ProgramEntry",
+                        principalColumn: "EntryID",
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateIndex(
@@ -254,12 +250,12 @@ namespace BASMockSite.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable("ProgramEntry");
+            migrationBuilder.DropTable("ProgramStructure");
             migrationBuilder.DropTable("AspNetRoleClaims");
             migrationBuilder.DropTable("AspNetUserClaims");
             migrationBuilder.DropTable("AspNetUserLogins");
             migrationBuilder.DropTable("AspNetUserRoles");
-            migrationBuilder.DropTable("CourseModel");
+            migrationBuilder.DropTable("ProgramEntry");
             migrationBuilder.DropTable("AspNetRoles");
             migrationBuilder.DropTable("AspNetUsers");
             migrationBuilder.DropTable("Degree");

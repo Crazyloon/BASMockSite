@@ -11,10 +11,15 @@
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
-select,
-textarea {
+select
+{
     max-width: 280px;
 }
+textarea{
+    max-width: 99%;
+    min-height: 100px;
+}
+
 
 /* Carousel */
 .carousel-image{
@@ -70,6 +75,6 @@ textarea {
 }
 
 /*??????? DEV TESTING CSS ???????*/
-/*div{border:1px solid black;}*/
+div{border:1px solid black;}
 
 

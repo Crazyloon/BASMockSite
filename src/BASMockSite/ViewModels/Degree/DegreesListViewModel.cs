@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,11 +9,42 @@ namespace BASMockSite.ViewModels.Degree
 {
     public class DegreesListViewModel
     {
-        public IEnumerable<BASMockSite.Models.Degree> Degrees { get; set; }
-        public IEnumerable<BASMockSite.Models.ProgramEntry> ProgramEntrys { get; set; }
-        public IEnumerable<BASMockSite.Models.ProgramManager> ProgramManagers { get; set; }
-        public IEnumerable<BASMockSite.Models.CourseModel> CourseModels { get; set; }
-        public IEnumerable<BASMockSite.Models.School> Schools { get; set; }
+        //PK
+        [Key]
+        public int DegreeID { get; set; }
+        //FK
+        [ForeignKey("ProgramManager")]
+        public int ProgramManagerID { get; set; }
+        [ForeignKey("School")]
+        public int SchoolID { get; set; }
+
+        [Required]
+        [Display(Name = "Admission Details")]
+        public string AdmissionsSummary { get; set; }
+
+        //[Required]
+        //[Display(Name = "Required Credits")]
+        //public int RequiredCredits { get; set; }
+
+        [Required]
+        [StringLength(256)]
+        public string DegreeName { get; set; }
+
+        [Required]
+        public string DegreeDescription { get; set; }
+
+        [Required]
+        [DataType(DataType.Url)]
+        public string ProgramURL { get; set; }
+
+        [Required]
+        public string SchoolName { get; set; }
+
+        [Required]
+        public string ProgramManagerName { get; set; }
+
+        public List<BASMockSite.Models.ProgramEntry> ProgramEntries { get; set; }
+        
 
     }
 }

@@ -1,57 +1,17 @@
-@model BASMockSite.ViewModels.Degree.DegreesListViewModel
+@model IEnumerable<BASMockSite.ViewModels.Degree.DegreesListViewModel>
 
 @{
-    ViewData["Title"] = "View Degrees";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Browse BAS Degrees</h2>
+<h2>Index</h2>
 
 <p>
-    This will be removed when a BAS Manager Content Update System is implemented
+    The ability to create a new degree is given only to BAS_Admins. <br />
+    The ability to create a new degree will be moved to an admin page later. <br />
     <a asp-action="Create">Create New</a>
 </p>
 
 <div class="col-xs-12">
-    @{ 
-        await Html.RenderPartialAsync("_DegreePartial", Model);
-    }
+    @{ await Html.RenderPartialAsync("_DegreePartial", Model);  }
 </div>
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProgramDuration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProgramURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProgramDuration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProgramURL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.DegreeID">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.DegreeID">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.DegreeID">Delete</a>
-        </td>
-    </tr>
-}
-</table>*@

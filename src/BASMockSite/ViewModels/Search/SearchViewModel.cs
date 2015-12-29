@@ -11,7 +11,7 @@ namespace BASMockSite.ViewModels.Search
 
         public string DegreeName { get; set; }
 
-        public Models.ModelType ModelType { get; set; }
+        public Models.CourseStructure ModelType { get; set; }
 
         public string County { get; set; }
 

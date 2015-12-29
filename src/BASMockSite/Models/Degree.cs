@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BASMockSite.Models
 {
     public class Degree
     {
+        //PK
         [Key]
         public int DegreeID { get; set; }
+        //FK
+        [ForeignKey("ProgramManager")]
+        public int ProgramManagerID { get; set; }
+        [ForeignKey("School")]
+        public int SchoolID { get; set; }
 
         [Required]
-        public string Title { get; set; }
+        [Display(Name = "Admission Details")]
+        public string AdmissionsSummary { get; set; }
+
+        [Required]
+        [Display(Name = "Required Credits")]
+        public int RequiredCredits { get; set; }
+
+        [Required]
+        [StringLength(256)]
+        public string Name { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        // Like 90 Credits, 6 quarters
-        [Required]
-        public string ProgramDuration { get; set; }
-
         [Required]
         [DataType(DataType.Url)]
         public string ProgramURL { get; set; }
-        //Nav props
-
+        
         public virtual School School { get; set; }
         public virtual ProgramManager ProgramManager { get; set; }
-        public virtual ICollection<CourseModel> CourseModels { get; set; }
+        public virtual ICollection<ProgramEntry> ProgramEntries { get; set; }
     }
 }

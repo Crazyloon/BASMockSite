@@ -1,36 +1,54 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.Entity.Migrations;
-using Microsoft.Data.Entity.Metadata;
 
 namespace BASMockSite.Migrations
 {
-    public partial class EditDegreeEntryRelationship : Migration
+    public partial class ModelChange : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(name: "FK_ProgramEntry_CourseModel_EntryID", table: "ProgramEntry");
+            migrationBuilder.DropForeignKey(name: "FK_Degree_ProgramManager_ProgramManagerID", table: "Degree");
+            migrationBuilder.DropForeignKey(name: "FK_Degree_School_SchoolID", table: "Degree");
+            migrationBuilder.DropForeignKey(name: "FK_ProgramEntry_Degree_DegreeID", table: "ProgramEntry");
+            migrationBuilder.DropForeignKey(name: "FK_ProgramStructure_ProgramEntry_ProgramEntrylID", table: "ProgramStructure");
             migrationBuilder.DropForeignKey(name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId", table: "AspNetRoleClaims");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserClaim<string>_ApplicationUser_UserId", table: "AspNetUserClaims");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId", table: "AspNetUserLogins");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_IdentityRole_RoleId", table: "AspNetUserRoles");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_ApplicationUser_UserId", table: "AspNetUserRoles");
-            migrationBuilder.AlterColumn<int>(
-                name: "EntryID",
-                table: "ProgramEntry",
-                nullable: false)
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-            migrationBuilder.AddColumn<int>(
-                name: "CourseModelModelID",
-                table: "ProgramEntry",
+            migrationBuilder.AddColumn<byte[]>(
+                name: "Logo",
+                table: "School",
                 nullable: true);
             migrationBuilder.AddForeignKey(
-                name: "FK_ProgramEntry_CourseModel_CourseModelModelID",
+                name: "FK_Degree_ProgramManager_ProgramManagerID",
+                table: "Degree",
+                column: "ProgramManagerID",
+                principalTable: "ProgramManager",
+                principalColumn: "ManagerID",
+                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(
+                name: "FK_Degree_School_SchoolID",
+                table: "Degree",
+                column: "SchoolID",
+                principalTable: "School",
+                principalColumn: "SchoolID",
+                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProgramEntry_Degree_DegreeID",
                 table: "ProgramEntry",
-                column: "CourseModelModelID",
-                principalTable: "CourseModel",
-                principalColumn: "ModelID",
-                onDelete: ReferentialAction.Restrict);
+                column: "DegreeID",
+                principalTable: "Degree",
+                principalColumn: "DegreeID",
+                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProgramStructure_ProgramEntry_ProgramEntrylID",
+                table: "ProgramStructure",
+                column: "ProgramEntrylID",
+                principalTable: "ProgramEntry",
+                principalColumn: "EntryID",
+                onDelete: ReferentialAction.Cascade);
             migrationBuilder.AddForeignKey(
                 name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
                 table: "AspNetRoleClaims",
@@ -70,23 +88,43 @@ namespace BASMockSite.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(name: "FK_ProgramEntry_CourseModel_CourseModelModelID", table: "ProgramEntry");
+            migrationBuilder.DropForeignKey(name: "FK_Degree_ProgramManager_ProgramManagerID", table: "Degree");
+            migrationBuilder.DropForeignKey(name: "FK_Degree_School_SchoolID", table: "Degree");
+            migrationBuilder.DropForeignKey(name: "FK_ProgramEntry_Degree_DegreeID", table: "ProgramEntry");
+            migrationBuilder.DropForeignKey(name: "FK_ProgramStructure_ProgramEntry_ProgramEntrylID", table: "ProgramStructure");
             migrationBuilder.DropForeignKey(name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId", table: "AspNetRoleClaims");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserClaim<string>_ApplicationUser_UserId", table: "AspNetUserClaims");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId", table: "AspNetUserLogins");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_IdentityRole_RoleId", table: "AspNetUserRoles");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_ApplicationUser_UserId", table: "AspNetUserRoles");
-            migrationBuilder.DropColumn(name: "CourseModelModelID", table: "ProgramEntry");
-            migrationBuilder.AlterColumn<int>(
-                name: "EntryID",
-                table: "ProgramEntry",
-                nullable: false);
+            migrationBuilder.DropColumn(name: "Logo", table: "School");
             migrationBuilder.AddForeignKey(
-                name: "FK_ProgramEntry_CourseModel_EntryID",
+                name: "FK_Degree_ProgramManager_ProgramManagerID",
+                table: "Degree",
+                column: "ProgramManagerID",
+                principalTable: "ProgramManager",
+                principalColumn: "ManagerID",
+                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.AddForeignKey(
+                name: "FK_Degree_School_SchoolID",
+                table: "Degree",
+                column: "SchoolID",
+                principalTable: "School",
+                principalColumn: "SchoolID",
+                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProgramEntry_Degree_DegreeID",
                 table: "ProgramEntry",
-                column: "EntryID",
-                principalTable: "CourseModel",
-                principalColumn: "ModelID",
+                column: "DegreeID",
+                principalTable: "Degree",
+                principalColumn: "DegreeID",
+                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProgramStructure_ProgramEntry_ProgramEntrylID",
+                table: "ProgramStructure",
+                column: "ProgramEntrylID",
+                principalTable: "ProgramEntry",
+                principalColumn: "EntryID",
                 onDelete: ReferentialAction.Restrict);
             migrationBuilder.AddForeignKey(
                 name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",

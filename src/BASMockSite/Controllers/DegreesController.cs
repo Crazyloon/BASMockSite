@@ -5,7 +5,6 @@ using Microsoft.Data.Entity;
 using BASMockSite.Models;
 using System.Collections.Generic;
 
-
 namespace BASMockSite.Controllers
 {
     public class DegreesController : Controller
@@ -20,16 +19,36 @@ namespace BASMockSite.Controllers
         // GET: Degrees
         public IActionResult Index()
         {
-            var degrees = new BASMockSite.ViewModels.Degree.DegreesListViewModel();
+            List<Degree> degrees = _context.Degree.Include(d => d.ProgramManager).Include(d => d.School).ToList();
+            var dlvm = new List<BASMockSite.ViewModels.Degree.DegreesListViewModel>();
 
-            degrees.Degrees = _context.Degree.ToList();
-            degrees.ProgramEntrys = _context.ProgramEntry.ToList();
-            degrees.ProgramManagers = _context.ProgramManager.ToList();
-            degrees.CourseModels = _context.CourseModel.ToList();
-            degrees.Schools= _context.School.ToList();
+            int i = 0;
+            foreach (var degree in degrees)
+            {
+                dlvm.Add(new ViewModels.Degree.DegreesListViewModel());
+
+                dlvm[i].DegreeID = degree.DegreeID;
+                dlvm[i].ProgramManagerID = degree.ProgramManagerID;
+                dlvm[i].SchoolID = degree.SchoolID;
+
+                dlvm[i].DegreeName = degree.Name;
+                dlvm[i].AdmissionsSummary = degree.AdmissionsSummary;
+                dlvm[i].DegreeDescription = degree.Description;
+                dlvm[i].ProgramURL = degree.ProgramURL;
+                dlvm[i].ProgramManagerName = degree.ProgramManager.Name;
+                dlvm[i].SchoolName = degree.School.Name;
+                dlvm[i].ProgramEntries = _context.ProgramEntry.Include(pe => pe.Structures).Where(pe => pe.DegreeID == degree.DegreeID).ToList();
+
+                i++;
+            }
+
+
+            //var degrees = _context.Degree.Include(d => d.School).Include(d => d.ProgramManager).Include(d => d.ProgramEntries).ToList();
+            //var degreeStructures = _context.ProgramStructure.ToList();
+
+            //ViewBag.EntryStructures = degreeStructures;
             
-
-            return View(degrees);
+            return View(dlvm);
         }
 
         // GET: Degrees/Details/5
@@ -82,6 +101,10 @@ namespace BASMockSite.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ManagerID = new SelectList(_context.ProgramManager.ToList(), "ManagerID", "Name");
+            ViewBag.SchoolID = new SelectList(_context.School.ToList(), "SchoolID", "Name");
+
             return View(degree);
         }
 
@@ -126,31 +149,6 @@ namespace BASMockSite.Controllers
             _context.Degree.Remove(degree);
             _context.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-
-        //public ActionResult _DegreePartialOrig()
-        //{
-        //    List<Degree> degrees;
-        //    degrees = _context.Degree.Include(d => d.CourseModels.Select(cm => cm.EntryStructure.Select(es => es.EntrySummary))).ToList();
-        //    ViewBag.DegreeCourseModels = _context.CourseModel.ToList();
-        //    ViewBag.DegreeProgramEntry = _context.ProgramEntry.ToList();
-
-        //    return PartialView("_DegreePartial", degrees);
-        //}
-
-        public ActionResult _DegreePartial()
-        {
-            var degrees = new BASMockSite.ViewModels.Degree.DegreesListViewModel();
-            for (int i = 0; i < _context.Degree.Count(); i++)
-            {
-                degrees.Degrees = _context.Degree.ToList();
-                degrees.ProgramEntrys = _context.ProgramEntry.ToList();
-                degrees.ProgramManagers = _context.ProgramManager.ToList();
-                degrees.CourseModels = _context.CourseModel.ToList();
-            }
-
-            return PartialView("_DegreePartial", degrees);
         }
     }
 }

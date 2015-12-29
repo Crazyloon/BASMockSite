@@ -1,43 +1,52 @@
-@model BASMockSite.ViewModels.Degree.DegreesListViewModel
+@model IEnumerable<BASMockSite.ViewModels.Degree.DegreesListViewModel>
 
-@*
-    ViewBag.DegreeCourseModels
-    ViewBag.DegreeProgramEntry
-*@
 
-@foreach (var degree in Model.Degrees)
+@foreach (var degree in Model)
 {
+    //List<ProgramEntry> cStructure = (ViewBag.EntryStructures as List<ProgramStructure>).Where(ps => ps.ProgramEntrylID == degree.ProgramEntries.).ToList();
+    @*@{ 
+        List<ProgramStructure> cstructures;
+        foreach (var strcu in cStructure)
+        {
+            cstructures = strcu.Structures.ToList();
+        }
+         }*@
+
     <div class="degree-container col-md-12 col-lg-6">
         <div class="degree-titlebar">
-            @Html.DisplayFor(m => degree.Title)
+            @Html.DisplayFor(m => degree.DegreeName)
             <br />
             <a href="@degree.ProgramURL">Check out the program page</a>
             <div style="float: right">
-                @Html.DisplayFor(m => degree.ProgramDuration)
+                @Html.DisplayFor(m => degree.SchoolName)
             </div>
         </div>
-        <div class="col-xs-12 col-md-6 col-lg-6 degree-summary">
-            @Html.DisplayFor(m => degree.Description)
+        <div class="col-xs-12 col-md-7 col-lg-7 degree-summary">
+            @Html.DisplayFor(m => degree.DegreeDescription)
         </div>
-        <div class="col-xs-12 col-md-6 col-lg-6 degree-details">
-            @{ var school = Model.Schools.Where(s => s.SchoolID == degree.School.SchoolID).SingleOrDefault();}
-            @Html.DisplayFor(m => school.Name)
-            <br />
-            Course Model(s): 
-            @{ 
-                List<CourseModel> cModels = Model.CourseModels.Where(cm => cm.Degree.DegreeID == degree.DegreeID).ToList();
-            }
-            @for (int i = 0; i < cModels.Count(); i++)
-            {
-                @Html.DisplayFor(m => cModels[i].Structure)
-                if (i < cModels.Count - 1)
-	            {
-                    @Html.Raw("&nbsp;/&nbsp;")
+        <div class="col-xs-12 col-md-5 col-lg-5 degree-details">            
+            <div class="col-xs-12">
+                @for (int i = 0; i < degree.ProgramEntries.Count(); i++)
+                {
+                    @:Entry Season:
+                    <span style="text-align:center; font-weight:600">@degree.ProgramEntries[i].Season.GetDisplayName()</span>
+                    <br />
+                    @Html.Raw("Attendance Structure:");
+                    <br />
+                    int j = 0;
+                    foreach (var ps in degree.ProgramEntries[i].Structures)
+                    {
+                        @ps.Structure.GetDisplayName();
+                        if (j < degree.ProgramEntries[i].Structures.Count() - 1)
+                        {
+                            @Html.Raw("&nbsp;/&nbsp;")
+                        }
+                        j++;
+                    }
+                    <br />
                 }
-            }
-            @{  var projManager = Model.ProgramManagers.Where(pm => pm.ManagerID == degree.ProgramManager.ManagerID).SingleOrDefault();}
-            <br />
-            Contact @Html.DisplayFor(m => projManager.Email) for more details.
+            </div>
+            Contact @Html.DisplayFor(m => degree.ProgramManagerName) for more details.
         </div>
         <div class="row">
             <a asp-action="Edit" asp-route-id="@degree.DegreeID">Edit</a>

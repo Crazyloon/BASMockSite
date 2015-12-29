@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace BASMockSite.Models
 {
@@ -17,236 +18,325 @@ namespace BASMockSite.Models
 
             if (!context.School.Any())
             {
-                var rtc = context.School.Add(
-                    new School {
-                        Name = "Renton Technical College",
-                        Address = "3000 NE 4th Street",
-                        City = "Renton",
-                        State = "WA",
-                        Zip = "98056",
-                        MainPhone = "4252355840",
-                        HomeWebAddress = "www.rtc.edu",
-                        Description = "Renton Technical College, also known as RTC. It is a public two-year institution located in the Renton Highlands of Renton, Washington within the Seattle metropolitan area.",
-                        County = "King",
-                        Tuition = 14500m,
-                        Accredited = true,
-                        Degrees = new List<Degree>
-                        {
-                            new Degree
-                            {
-                                Title = "Application Development",
-                                Description = "The Bachelor of Applied Science (BAS) in Application Development program at Renton Technical College is designed for students who are ready to take the next step toward a bachelor’s degree. The program includes technical courses in: data analysis, application and software development, programming, and project management. In addition to gaining a strong technical foundation, our program addresses the science, communications, and quantitative reasoning needed to work in this growing field. Students learn to work in teams, manage IT projects, and prepare software documentation. Graduates prepare for careers in a variety of occupations including: software development, computer systems analysis, web development, database analysis and mobile application development.",
-                                ProgramDuration = "90 Credits, 6 Quarters",
-                                ProgramURL = "http://www.rtc.edu/appdev",
-                                CourseModels = new List<CourseModel>
-                                {
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Evening,
-                                        EntryStructure = new List<ProgramEntry>
-                                        {
-                                            new ProgramEntry
-                                            {
-                                                ApplicationDeadline = new DateTime(2016, 4, 1),
-                                                EntrySummary = "Admission is selective. Applications are due April 1st for the following fall entry. Applicants are notified by mail of a decision between late April and early May.",
-                                                Season = EntrySeason.Fall
-                                            }
-                                        }
-                                    },
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Hybrid
-                                    }
-                                }
-                            }
-                        },
-                        ProgramManagers = new List<ProgramManager>
-                        {
-                            new ProgramManager
-                            {
-                                Name = "Stefanie McIrvin",
-                                Email = "smcirvin@rtc.edu"
-                            }
-                        }
-                    }).Entity;
+                //var ps = new List<ProgramStructure>
+                //{
+                //    // Create each program structure with an ID for the Program Entry it is related to.
+                //    new ProgramStructure { Structure = CourseStructure.Daytime,  }, // 0
+                //    new ProgramStructure { Structure = CourseStructure.Evening }, // 1
+                //    new ProgramStructure { Structure = CourseStructure.FullTime }, // 2
+                //    new ProgramStructure { Structure = CourseStructure.Hybrid }, // 3
+                //    new ProgramStructure { Structure = CourseStructure.Online }, // 4
+                //    new ProgramStructure { Structure = CourseStructure.PartTime }, // 5
+                //    new ProgramStructure { Structure = CourseStructure.Daily } // 6
+                //};
 
-                var bcc = context.School.Add(
-                    new School
-                    {
-                        Name = "Bellevue Community College",
-                        Address = "3000 Landerholm Circle SE",
-                        City = "Bellevue",
-                        State = "WA",
-                        Zip = "98007",
-                        MainPhone = "4255641000",
-                        HomeWebAddress = "www.bellevuecollege.edu",
-                        Description = "Bellevue College is an open-access, community-based, public institution of higher education located in Bellevue, Washington, a city on the Eastside of Lake Washington, near Seattle.",
-                        County = "King",
-                        Tuition = 15000m,
-                        Accredited = true,
-                        Degrees = new List<Degree>
-                        {
-                            new Degree
-                            {
-                                Title = "Data Analytics",
-                                Description = "The Bachelor of Applied Science in Data Analytics provides graduates with the skills and knowledge needed for employment in the rapidly emerging field of data analytics, which comprises analyzing and interpreting the large datasets now available in a wide range of organizations and industries. Modern data analytics brings together tools and techniques from business, communication, graphic arts, information technology and statistics to collect, mine, interpret and represent large datasets to illustrate concepts and inform decisions.",
-                                ProgramDuration = "90 Credits, 6 Quarters",
-                                ProgramURL = "http://www.bellevuecollege.edu/programs/degrees/bachelor/da/",
-                                CourseModels = new List<CourseModel>
-                                {
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Daytime,
-                                        EntryStructure = new List<ProgramEntry>
-                                        {
-                                            new ProgramEntry
-                                            {
-                                                EntrySummary = "Applications are available beginning each January for the following fall entry.",
-                                                Season = EntrySeason.Fall
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        ProgramManagers = new List<ProgramManager>
-                        {
-                            new ProgramManager
-                            {
-                                Name = "Shanon Reedy",
-                                Email = "shanon.reedy@bellevuecollege.edu"
-                            }
-                        }
+                ProgramStructure rtcPS1 = new ProgramStructure { ProgramEntrylID = 1, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
+                ProgramStructure rtcPS2 = new ProgramStructure { ProgramEntrylID = 1, Structure = CourseStructure.Hybrid, ProgramDuration = "6 Quarters", };
 
-                    }).Entity;
+                //ps.ForEach(p => context.ProgramStructure.Add(p));
+                //context.SaveChanges();
 
-                var grcc = context.School.Add(
-                    new School
-                    {
-                        Name = "Green River Community College",
-                        Address = "12401 SE 320th Street",
-                        City = "Auburn",
-                        State = "WA",
-                        Zip = "98092",
-                        MainPhone = "2538339111",
-                        HomeWebAddress = "www.greenriver.edu",
-                        Description = "Green River College is a community college located in Auburn, Washington. It has a student body of approximately 10,000.",
-                        County = "King",
-                        Tuition = 15400m,
-                        Accredited = true,
-                        Degrees = new List<Degree>
-                        {
-                            new Degree
-                            {
-                                Title = "Network Administration and Security",
-                                Description = "The bachelor's degree program in Network Administration and Security is designed to prepare students for employment as network and systems administrators, information security analysts, or computer support specialists.",
-                                ProgramDuration = "90 Credits, 6 Quarters",
-                                ProgramURL = "http://www.greenriver.edu/academics/areas-of-study/bas-programs/network-administration-and-security.htm",
-                                CourseModels = new List<CourseModel>
-                                {
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Daytime,
-                                        EntryStructure = new List<ProgramEntry>
-                                        {
-                                            new ProgramEntry
-                                            {
-                                                EntrySummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
-                                                Season = EntrySeason.Fall
-                                            }
-                                        }
-                                    },
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Evening,
-                                        EntryStructure = new List<ProgramEntry>
-                                        {
-                                            new ProgramEntry
-                                            {
-                                                EntrySummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
-                                                Season = EntrySeason.Winter
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        ProgramManagers = new List<ProgramManager>
-                        {
-                            new ProgramManager
-                            {
-                                Name = "Sheila Capps",
-                                Email = "scapps@greenriver.edu"
-                            }
-                        }
+                ProgramEntry rtcFall = new ProgramEntry
+                {
+                    ApplicationDeadline = new DateTime(2016, 4, 1),
+                    Season = EntrySeason.Fall,
+                    DegreeID = 1
+                    //Structures = { ps[1], ps[3] }
+                };
 
-                    }).Entity;
+                ProgramManager rtcSM = new ProgramManager
+                {
+                    Name = "Stefanie McIrvin",
+                    Email = "smcirvin@rtc.edu",
+                };
 
-                var hlc = context.School.Add(
-                    new School
-                    {
-                        Name = "Highline College",
-                        Address = "2400 S 240th St",
-                        City = "Des Moines",
-                        State = "WA",
-                        Zip = "98198",
-                        MainPhone = "2068783710",
-                        HomeWebAddress = "www.highline.edu",
-                        Description = "Highline College is an institution of higher education located in Des Moines, Washington, south of Seattle, Washington. Highline was founded in 1961 as the first community college in King County.",
-                        County = "King",
-                        Tuition = 15000m,
-                        Accredited = true,
-                        Degrees = new List<Degree>
-                        {
-                            new Degree
-                            {
-                                Title = "Cybersecurity and Forensics",
-                                Description = "In Highline's Computer Science and Computer Information Systems Department, you can prepare for a variety of information technology–related careers. Offering advanced topics and training, the department offers you the opportunity to become a computer programmer, network specialist, website/database developer, or data recovery and computer forensics specialist.",
-                                ProgramDuration = "90 Credits, 6 Quarters",
-                                ProgramURL = "http://www.highline.edu/bas/cybersecurity/",
-                                CourseModels = new List<CourseModel>
-                                {
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Daytime,
-                                        EntryStructure = new List<ProgramEntry>
-                                        {
-                                            new ProgramEntry
-                                            {
-                                                ApplicationDeadline = new DateTime(2016, 6, 30),
-                                                EntrySummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
-                                                Season = EntrySeason.Fall
-                                            }
-                                        }
-                                    },
-                                    new CourseModel
-                                    {
-                                        Structure = ModelType.Daytime,
-                                        EntryStructure = new List<ProgramEntry>
-                                        {
-                                            new ProgramEntry
-                                            {
-                                                ApplicationDeadline = new DateTime(2016, 6, 30),
-                                                EntrySummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
-                                                Season = EntrySeason.Spring
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        ProgramManagers = new List<ProgramManager>
-                        {
-                            new ProgramManager
-                            {
-                                Name = "Tanya Powers",
-                                Email = "tpowers@highline.edu"
-                            }
-                        }
+                School rtc = new School
+                {
+                    Name = "Renton Technical College",
+                    Address = "3000 NE 4th Street",
+                    City = "Renton",
+                    State = "WA",
+                    Zip = "98056",
+                    MainPhone = "4252355840",
+                    HomeWebAddress = "www.rtc.edu",
+                    Description = "Renton Technical College, also known as RTC. It is a public two-year institution located in the Renton Highlands of Renton, Washington within the Seattle metropolitan area.",
+                    County = "King",
+                    Tuition = 14500m,
+                    Accredited = true,
+                    Logo = File.ReadAllBytes("images//rtctemp.png")
+                    //ProgramEntries = { rtcFall },
+                    //ProgramManagers = { rtcSM }
+                };
+
+                Degree rtcBASAppDev = new Degree
+                {
+                    Name = "Application Development",
+                    Description = "The Bachelor of Applied Science (BAS) in Application Development program at Renton Technical College is designed for students who are ready to take the next step toward a bachelor’s degree. The program includes technical courses in: data analysis, application and software development, programming, and project management. In addition to gaining a strong technical foundation, our program addresses the science, communications, and quantitative reasoning needed to work in this growing field. Students learn to work in teams, manage IT projects, and prepare software documentation. Graduates prepare for careers in a variety of occupations including: software development, computer systems analysis, web development, database analysis and mobile application development.",
+                    AdmissionsSummary = "Admission is selective. Applications are due April 1st for the following fall entry. Applicants are notified by mail of a decision between late April and early May.",
+                    ProgramURL = "http://www.rtc.edu/appdev",
+                    ProgramManagerID = 1,
+                    SchoolID = 1,
+                    RequiredCredits = 90,
+                    //School = rtc,
+                    //ProgramManager = rtcSM,
+                    //ProgramEntries = { rtcFall }
+                };
+
+                //var rentonTech = context.School.Add(rtc).Entity;
+                //var rtcManager = context.ProgramManager.Add(rtcSM).Entity;
+                //var rtcDeg = context.Degree.Add(rtcBASAppDev).Entity;
+                //var rtcEntry = context.ProgramEntry.Add(rtcFall).Entity;
+                //var rtcStruct1 = context.ProgramStructure.Add(rtcPS1).Entity;
+                //var rtcStruct2 = context.ProgramStructure.Add(rtcPS2).Entity;
 
 
-                    }).Entity;               
+                ////////////////////
 
+                ProgramStructure bccPS1 = new ProgramStructure { ProgramEntrylID = 2, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure bccPS2 = new ProgramStructure { ProgramEntrylID = 2, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
+
+                ProgramEntry bccFall = new ProgramEntry
+                {
+                    ApplicationDeadline = new DateTime(2016, 4, 1),
+                    Season = EntrySeason.Fall,
+                    DegreeID = 2
+                    //Structures = { ps[0], ps[6] },
+                };
+
+                ProgramManager bccSR = new ProgramManager
+                {
+                    Name = "Shanon Reedy",
+                    Email = "shanon.reedy@bellevuecollege.edu",
+                };
+
+                School bcc = new School
+                {
+                    Name = "Bellevue Community College",
+                    Address = "3000 Landerholm Circle SE",
+                    City = "Bellevue",
+                    State = "WA",
+                    Zip = "98007",
+                    MainPhone = "4255641000",
+                    HomeWebAddress = "www.bellevuecollege.edu",
+                    Description = "Bellevue College is an open-access, community-based, public institution of higher education located in Bellevue, Washington, a city on the Eastside of Lake Washington, near Seattle.",
+                    County = "King",
+                    Tuition = 15000m,
+                    Accredited = true,
+                    Logo = File.ReadAllBytes("images//bccTemp.png")
+                    //ProgramEntries = { bccFall },
+                    //ProgramManagers = { bccSR }
+                };
+
+                Degree bccDatAn = new Degree
+                {
+                    Name = "Data Analytics",
+                    Description = "The Bachelor of Applied Science in Data Analytics provides graduates with the skills and knowledge needed for employment in the rapidly emerging field of data analytics, which comprises analyzing and interpreting the large datasets now available in a wide range of organizations and industries. Modern data analytics brings together tools and techniques from business, communication, graphic arts, information technology and statistics to collect, mine, interpret and represent large datasets to illustrate concepts and inform decisions.",
+                    AdmissionsSummary = "Applications are available beginning each January for the following fall entry.",
+                    ProgramURL = "http://www.bellevuecollege.edu/programs/degrees/bachelor/da/",
+                    ProgramManagerID = 2,
+                    SchoolID = 2,
+                    RequiredCredits = 90,
+                    //School = bcc,
+                    //ProgramManager = bccSR,
+                    //ProgramEntries = { bccFall }
+                };
+
+
+                //var bellevueCC = context.School.Add(bcc).Entity;                
+                //var bccManager = context.ProgramManager.Add(bccSR).Entity;
+                //var bccDeg = context.Degree.Add(bccDatAn).Entity;
+                //var bccEntry = context.ProgramEntry.Add(bccFall).Entity;                
+                //var bccStruct1 = context.ProgramStructure.Add(bccPS1).Entity;
+                //var bccStruct2 = context.ProgramStructure.Add(bccPS2).Entity;
+
+                ////////////////////
+
+                ProgramStructure grccPS1 = new ProgramStructure { ProgramEntrylID = 3, Structure = CourseStructure.FullTime, ProgramDuration = "6 Quarters", };
+                ProgramStructure grccPS2 = new ProgramStructure { ProgramEntrylID = 3, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+
+                ProgramStructure grccPS3 = new ProgramStructure { ProgramEntrylID = 4, Structure = CourseStructure.PartTime, ProgramDuration = "6 Quarters", };
+                ProgramStructure grccPS4 = new ProgramStructure { ProgramEntrylID = 4, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
+
+                ProgramEntry grccFall = new ProgramEntry
+                {
+                    ApplicationDeadline = new DateTime(2016, 4, 1),
+                    Season = EntrySeason.Fall,
+                    DegreeID = 3
+                    //Structures = { ps[2], ps[0] },
+                };
+
+                ProgramEntry grccWint = new ProgramEntry
+                {
+                    ApplicationDeadline = new DateTime(2016, 4, 1),
+                    Season = EntrySeason.Winter,
+                    DegreeID = 3
+                    //Structures = { ps[5], ps[1] }, //Parttime, evening
+                };
+
+                ProgramManager grccSC = new ProgramManager
+                {
+                    Name = "Sheila Capps",
+                    Email = "scapps@greenriver.edu",
+                };
+
+                School grcc = new School
+                {
+                    Name = "Green River Community College",
+                    Address = "12401 SE 320th Street",
+                    City = "Auburn",
+                    State = "WA",
+                    Zip = "98092",
+                    MainPhone = "2538339111",
+                    HomeWebAddress = "www.greenriver.edu",
+                    Description = "Green River College is a community college located in Auburn, Washington. It has a student body of approximately 10,000.",
+                    County = "King",
+                    Tuition = 15400m,
+                    Accredited = true,
+                    Logo = File.ReadAllBytes("images//grccTemp.png")
+                    //ProgramEntries = { grccFall, grccWint },
+                    //ProgramManagers = { grccSC }
+                };
+
+                Degree grccNetAd = new Degree
+                {
+                    Name = "Network Administration and Security",
+                    Description = "The bachelor's degree program in Network Administration and Security is designed to prepare students for employment as network and systems administrators, information security analysts, or computer support specialists.",
+                    AdmissionsSummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
+                    ProgramURL = "http://www.greenriver.edu/academics/areas-of-study/bas-programs/network-administration-and-security.htm",
+                    ProgramManagerID = 3,
+                    SchoolID = 3,
+                    RequiredCredits = 90,
+                    //School = grcc,
+                    //ProgramManager = grccSC,
+                    //ProgramEntries = { grccWint }
+                };
+
+                
+                //var GreenRiverCC = context.School.Add(grcc).Entity;
+                //var grccManager = context.ProgramManager.Add(grccSC).Entity;                
+                //var grccDeg = context.Degree.Add(grccNetAd).Entity;
+                //var grccEntryFall = context.ProgramEntry.Add(grccFall).Entity;
+                //var grccEntryWint = context.ProgramEntry.Add(grccWint).Entity;
+                //var grccStruct1 = context.ProgramStructure.Add(grccPS1).Entity;
+                //var grccStruct2 = context.ProgramStructure.Add(grccPS2).Entity;
+
+                ////////////////////
+
+                ProgramStructure hlcPS1 = new ProgramStructure { ProgramEntrylID = 5, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure hlcPS2 = new ProgramStructure { ProgramEntrylID = 5, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
+
+                ProgramStructure hlcPS3 = new ProgramStructure { ProgramEntrylID = 6, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure hlcPS4 = new ProgramStructure { ProgramEntrylID = 6, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
+
+                ProgramEntry hlcFall = new ProgramEntry
+                {
+                    ApplicationDeadline = new DateTime(2016, 4, 1),
+                    Season = EntrySeason.Fall,
+                    DegreeID = 4
+                    //Structures = { ps[0], ps[6] }, // CourseStructure.Daytime, CourseStructure.Daily
+                };
+
+                ProgramEntry hlcSpring = new ProgramEntry
+                {
+                    ApplicationDeadline = new DateTime(2016, 4, 1),
+                    Season = EntrySeason.Spring,
+                    DegreeID = 4
+                    //Structures = { ps[0], ps[6] }, // CourseStructure.Daytime, CourseStructure.Daily
+                };
+
+                ProgramManager hlcTP = new ProgramManager
+                {
+                    Name = "Tanya Powers",
+                    Email = "tpowers@highline.edu",
+                };
+
+                School hlc = new School
+                {
+                    Name = "Highline College",
+                    Address = "2400 S 240th St",
+                    City = "Des Moines",
+                    State = "WA",
+                    Zip = "98198",
+                    MainPhone = "2068783710",
+                    HomeWebAddress = "www.highline.edu",
+                    Description = "Highline College is an institution of higher education located in Des Moines, Washington, south of Seattle, Washington. Highline was founded in 1961 as the first community college in King County.",
+                    County = "King",
+                    Tuition = 15000m,
+                    Accredited = true,
+                    Logo = File.ReadAllBytes("images//hlcTemp.jpg")
+                    //ProgramEntries = { hlcFall, hlcSpring },
+                    //ProgramManagers = { hlcTP }
+                };
+
+                Degree hlcCyberFor = new Degree
+                {
+                    Name = "Cybersecurity and Forensics",
+                    Description = "In Highline's Computer Science and Computer Information Systems Department, you can prepare for a variety of information technology–related careers. Offering advanced topics and training, the department offers you the opportunity to become a computer programmer, network specialist, website/database developer, or data recovery and computer forensics specialist.",
+                    AdmissionsSummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
+                    ProgramURL = "http://www.highline.edu/bas/cybersecurity/",
+                    ProgramManagerID = 4,
+                    SchoolID = 4,
+                    RequiredCredits = 90,
+                    //School = hlc,
+                    //ProgramManager = hlcTP,
+                    //ProgramEntries = { hlcFall, hlcSpring }
+                };
+
+                
+                //var highlineC = context.School.Add(hlc).Entity;
+                //var hlcManager = context.ProgramManager.Add(hlcTP).Entity;
+                //var hlcDeg = context.Degree.Add(hlcCyberFor).Entity;
+                //var hlcEntryFall = context.ProgramEntry.Add(hlcFall).Entity;
+                //var hlcEntrySpring = context.ProgramEntry.Add(hlcSpring).Entity;
+                //var hlcStruct1 = context.ProgramStructure.Add(hlcPS1).Entity;
+                //var hlcStruct2 = context.ProgramStructure.Add(hlcPS2).Entity;
+                //var hlcStruct3 = context.ProgramStructure.Add(hlcPS3).Entity;
+                //var hlcStruct4 = context.ProgramStructure.Add(hlcPS4).Entity;
+
+
+
+                var rentonTech = context.School.Add(rtc).Entity;
+                var bellevueCC = context.School.Add(bcc).Entity;
+                var GreenRiverCC = context.School.Add(grcc).Entity;
+                var highlineC = context.School.Add(hlc).Entity;
+
+                context.SaveChanges();
+
+                var rtcManager = context.ProgramManager.Add(rtcSM).Entity;
+                var bccManager = context.ProgramManager.Add(bccSR).Entity;
+                var grccManager = context.ProgramManager.Add(grccSC).Entity;
+                var hlcManager = context.ProgramManager.Add(hlcTP).Entity;
+
+                context.SaveChanges();
+
+                var rtcDeg = context.Degree.Add(rtcBASAppDev).Entity;
+                var bccDeg = context.Degree.Add(bccDatAn).Entity;
+                var grccDeg = context.Degree.Add(grccNetAd).Entity;
+                var hlcDeg = context.Degree.Add(hlcCyberFor).Entity;
+
+                context.SaveChanges();
+
+                var rtcEntry = context.ProgramEntry.Add(rtcFall).Entity;
+                var bccEntry = context.ProgramEntry.Add(bccFall).Entity;
+                var grccEntryFall = context.ProgramEntry.Add(grccFall).Entity;
+                var grccEntryWint = context.ProgramEntry.Add(grccWint).Entity;
+                var hlcEntryFall = context.ProgramEntry.Add(hlcFall).Entity;
+                var hlcEntrySpring = context.ProgramEntry.Add(hlcSpring).Entity;
+
+                context.SaveChanges();
+
+                var rtcStruct1 = context.ProgramStructure.Add(rtcPS1).Entity;
+                var rtcStruct2 = context.ProgramStructure.Add(rtcPS2).Entity;
+                var bccStruct1 = context.ProgramStructure.Add(bccPS1).Entity;
+                var bccStruct2 = context.ProgramStructure.Add(bccPS2).Entity;
+                var grccStruct1 = context.ProgramStructure.Add(grccPS1).Entity;
+                var grccStruct2 = context.ProgramStructure.Add(grccPS2).Entity;
+                var grccStruct3 = context.ProgramStructure.Add(grccPS3).Entity;
+                var grccStruct4 = context.ProgramStructure.Add(grccPS4).Entity;
+                var hlcStruct1 = context.ProgramStructure.Add(hlcPS1).Entity;
+                var hlcStruct2 = context.ProgramStructure.Add(hlcPS2).Entity;
+                var hlcStruct3 = context.ProgramStructure.Add(hlcPS3).Entity;
+                var hlcStruct4 = context.ProgramStructure.Add(hlcPS4).Entity;
 
 
                 context.SaveChanges();
