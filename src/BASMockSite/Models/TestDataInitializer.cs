@@ -31,24 +31,24 @@ namespace BASMockSite.Models
 
             //}
 
-            if (!context.School.Any())
+            if (!context.Colleges.Any())
             {
-                //var ps = new List<ProgramStructure>
+                //var ps = new List<ProgramStructures>
                 //{
                 //    // Create each program structure with an ID for the Program Entry it is related to.
-                //    new ProgramStructure { Structure = CourseStructure.Daytime,  }, // 0
-                //    new ProgramStructure { Structure = CourseStructure.Evening }, // 1
-                //    new ProgramStructure { Structure = CourseStructure.FullTime }, // 2
-                //    new ProgramStructure { Structure = CourseStructure.Hybrid }, // 3
-                //    new ProgramStructure { Structure = CourseStructure.Online }, // 4
-                //    new ProgramStructure { Structure = CourseStructure.PartTime }, // 5
-                //    new ProgramStructure { Structure = CourseStructure.Daily } // 6
+                //    new ProgramStructures { Structure = CourseStructure.Daytime,  }, // 0
+                //    new ProgramStructures { Structure = CourseStructure.Evening }, // 1
+                //    new ProgramStructures { Structure = CourseStructure.FullTime }, // 2
+                //    new ProgramStructures { Structure = CourseStructure.Hybrid }, // 3
+                //    new ProgramStructures { Structure = CourseStructure.Online }, // 4
+                //    new ProgramStructures { Structure = CourseStructure.PartTime }, // 5
+                //    new ProgramStructures { Structure = CourseStructure.Daily } // 6
                 //};
 
                 ProgramStructure rtcPS1 = new ProgramStructure { ProgramEntrylID = 1, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
                 ProgramStructure rtcPS2 = new ProgramStructure { ProgramEntrylID = 1, Structure = CourseStructure.Hybrid, ProgramDuration = "6 Quarters", };
 
-                //ps.ForEach(p => context.ProgramStructure.Add(p));
+                //ps.ForEach(p => context.ProgramStructures.Add(p));
                 //context.SaveChanges();
 
                 ProgramEntry rtcFall = new ProgramEntry
@@ -95,16 +95,16 @@ namespace BASMockSite.Models
                     CollegeID = 1,
                     RequiredCredits = 90,
                     //College = rtc,
-                    //ProgramManager = rtcSM,
+                    //ProgramManagers = rtcSM,
                     //ProgramEntries = { rtcFall }
                 };
 
                 //var rentonTech = context.College.Add(rtc).Entity;
-                //var rtcManager = context.ProgramManager.Add(rtcSM).Entity;
-                //var rtcDeg = context.Degree.Add(rtcBASAppDev).Entity;
-                //var rtcEntry = context.ProgramEntry.Add(rtcFall).Entity;
-                //var rtcStruct1 = context.ProgramStructure.Add(rtcPS1).Entity;
-                //var rtcStruct2 = context.ProgramStructure.Add(rtcPS2).Entity;
+                //var rtcManager = context.ProgramManagers.Add(rtcSM).Entity;
+                //var rtcDeg = context.Degrees.Add(rtcBASAppDev).Entity;
+                //var rtcEntry = context.ProgramEntries.Add(rtcFall).Entity;
+                //var rtcStruct1 = context.ProgramStructures.Add(rtcPS1).Entity;
+                //var rtcStruct2 = context.ProgramStructures.Add(rtcPS2).Entity;
 
 
                 ////////////////////
@@ -156,17 +156,17 @@ namespace BASMockSite.Models
                     CollegeID = 2,
                     RequiredCredits = 90,
                     //College = bcc,
-                    //ProgramManager = bccSR,
+                    //ProgramManagers = bccSR,
                     //ProgramEntries = { bccFall }
                 };
 
 
                 //var bellevueCC = context.College.Add(bcc).Entity;                
-                //var bccManager = context.ProgramManager.Add(bccSR).Entity;
-                //var bccDeg = context.Degree.Add(bccDatAn).Entity;
-                //var bccEntry = context.ProgramEntry.Add(bccFall).Entity;                
-                //var bccStruct1 = context.ProgramStructure.Add(bccPS1).Entity;
-                //var bccStruct2 = context.ProgramStructure.Add(bccPS2).Entity;
+                //var bccManager = context.ProgramManagers.Add(bccSR).Entity;
+                //var bccDeg = context.Degrees.Add(bccDatAn).Entity;
+                //var bccEntry = context.ProgramEntries.Add(bccFall).Entity;                
+                //var bccStruct1 = context.ProgramStructures.Add(bccPS1).Entity;
+                //var bccStruct2 = context.ProgramStructures.Add(bccPS2).Entity;
 
                 ////////////////////
 
@@ -228,18 +228,18 @@ namespace BASMockSite.Models
                     CollegeID = 3,
                     RequiredCredits = 90,
                     //College = grcc,
-                    //ProgramManager = grccSC,
+                    //ProgramManagers = grccSC,
                     //ProgramEntries = { grccWint }
                 };
 
                 
                 //var GreenRiverCC = context.College.Add(grcc).Entity;
-                //var grccManager = context.ProgramManager.Add(grccSC).Entity;                
-                //var grccDeg = context.Degree.Add(grccNetAd).Entity;
-                //var grccEntryFall = context.ProgramEntry.Add(grccFall).Entity;
-                //var grccEntryWint = context.ProgramEntry.Add(grccWint).Entity;
-                //var grccStruct1 = context.ProgramStructure.Add(grccPS1).Entity;
-                //var grccStruct2 = context.ProgramStructure.Add(grccPS2).Entity;
+                //var grccManager = context.ProgramManagers.Add(grccSC).Entity;                
+                //var grccDeg = context.Degrees.Add(grccNetAd).Entity;
+                //var grccEntryFall = context.ProgramEntries.Add(grccFall).Entity;
+                //var grccEntryWint = context.ProgramEntries.Add(grccWint).Entity;
+                //var grccStruct1 = context.ProgramStructures.Add(grccPS1).Entity;
+                //var grccStruct2 = context.ProgramStructures.Add(grccPS2).Entity;
 
                 ////////////////////
 
@@ -301,20 +301,20 @@ namespace BASMockSite.Models
                     CollegeID = 4,
                     RequiredCredits = 90,
                     //College = hlc,
-                    //ProgramManager = hlcTP,
+                    //ProgramManagers = hlcTP,
                     //ProgramEntries = { hlcFall, hlcSpring }
                 };
 
 
                 //var highlineC = context.College.Add(hlc).Entity;
-                //var hlcManager = context.ProgramManager.Add(hlcTP).Entity;
-                //var hlcDeg = context.Degree.Add(hlcCyberFor).Entity;
-                //var hlcEntryFall = context.ProgramEntry.Add(hlcFall).Entity;
-                //var hlcEntrySpring = context.ProgramEntry.Add(hlcSpring).Entity;
-                //var hlcStruct1 = context.ProgramStructure.Add(hlcPS1).Entity;
-                //var hlcStruct2 = context.ProgramStructure.Add(hlcPS2).Entity;
-                //var hlcStruct3 = context.ProgramStructure.Add(hlcPS3).Entity;
-                //var hlcStruct4 = context.ProgramStructure.Add(hlcPS4).Entity;
+                //var hlcManager = context.ProgramManagers.Add(hlcTP).Entity;
+                //var hlcDeg = context.Degrees.Add(hlcCyberFor).Entity;
+                //var hlcEntryFall = context.ProgramEntries.Add(hlcFall).Entity;
+                //var hlcEntrySpring = context.ProgramEntries.Add(hlcSpring).Entity;
+                //var hlcStruct1 = context.ProgramStructures.Add(hlcPS1).Entity;
+                //var hlcStruct2 = context.ProgramStructures.Add(hlcPS2).Entity;
+                //var hlcStruct3 = context.ProgramStructures.Add(hlcPS3).Entity;
+                //var hlcStruct4 = context.ProgramStructures.Add(hlcPS4).Entity;
 
                 List<Image> imgList = new List<Image>
                 {
@@ -354,52 +354,52 @@ namespace BASMockSite.Models
                     }
                 };
 
-                var rentonTech = context.School.Add(rtc).Entity;
-                var bellevueCC = context.School.Add(bcc).Entity;
-                var GreenRiverCC = context.School.Add(grcc).Entity;
-                var highlineC = context.School.Add(hlc).Entity;
+                var rentonTech = context.Colleges.Add(rtc).Entity;
+                var bellevueCC = context.Colleges.Add(bcc).Entity;
+                var GreenRiverCC = context.Colleges.Add(grcc).Entity;
+                var highlineC = context.Colleges.Add(hlc).Entity;
 
                 context.SaveChanges();
 
                 //
-                imgList.ForEach(img => context.Image.Add(img));
+                imgList.ForEach(img => context.Images.Add(img));
                 //
 
-                var rtcManager = context.ProgramManager.Add(rtcSM).Entity;
-                var bccManager = context.ProgramManager.Add(bccSR).Entity;
-                var grccManager = context.ProgramManager.Add(grccSC).Entity;
-                var hlcManager = context.ProgramManager.Add(hlcTP).Entity;
+                var rtcManager = context.ProgramManagers.Add(rtcSM).Entity;
+                var bccManager = context.ProgramManagers.Add(bccSR).Entity;
+                var grccManager = context.ProgramManagers.Add(grccSC).Entity;
+                var hlcManager = context.ProgramManagers.Add(hlcTP).Entity;
 
                 context.SaveChanges();
 
-                var rtcDeg = context.Degree.Add(rtcBASAppDev).Entity;
-                var bccDeg = context.Degree.Add(bccDatAn).Entity;
-                var grccDeg = context.Degree.Add(grccNetAd).Entity;
-                var hlcDeg = context.Degree.Add(hlcCyberFor).Entity;
+                var rtcDeg = context.Degrees.Add(rtcBASAppDev).Entity;
+                var bccDeg = context.Degrees.Add(bccDatAn).Entity;
+                var grccDeg = context.Degrees.Add(grccNetAd).Entity;
+                var hlcDeg = context.Degrees.Add(hlcCyberFor).Entity;
 
                 context.SaveChanges();
 
-                var rtcEntry = context.ProgramEntry.Add(rtcFall).Entity;
-                var bccEntry = context.ProgramEntry.Add(bccFall).Entity;
-                var grccEntryFall = context.ProgramEntry.Add(grccFall).Entity;
-                var grccEntryWint = context.ProgramEntry.Add(grccWint).Entity;
-                var hlcEntryFall = context.ProgramEntry.Add(hlcFall).Entity;
-                var hlcEntrySpring = context.ProgramEntry.Add(hlcSpring).Entity;
+                var rtcEntry = context.ProgramEntries.Add(rtcFall).Entity;
+                var bccEntry = context.ProgramEntries.Add(bccFall).Entity;
+                var grccEntryFall = context.ProgramEntries.Add(grccFall).Entity;
+                var grccEntryWint = context.ProgramEntries.Add(grccWint).Entity;
+                var hlcEntryFall = context.ProgramEntries.Add(hlcFall).Entity;
+                var hlcEntrySpring = context.ProgramEntries.Add(hlcSpring).Entity;
 
                 context.SaveChanges();
 
-                var rtcStruct1 = context.ProgramStructure.Add(rtcPS1).Entity;
-                var rtcStruct2 = context.ProgramStructure.Add(rtcPS2).Entity;
-                var bccStruct1 = context.ProgramStructure.Add(bccPS1).Entity;
-                var bccStruct2 = context.ProgramStructure.Add(bccPS2).Entity;
-                var grccStruct1 = context.ProgramStructure.Add(grccPS1).Entity;
-                var grccStruct2 = context.ProgramStructure.Add(grccPS2).Entity;
-                var grccStruct3 = context.ProgramStructure.Add(grccPS3).Entity;
-                var grccStruct4 = context.ProgramStructure.Add(grccPS4).Entity;
-                var hlcStruct1 = context.ProgramStructure.Add(hlcPS1).Entity;
-                var hlcStruct2 = context.ProgramStructure.Add(hlcPS2).Entity;
-                var hlcStruct3 = context.ProgramStructure.Add(hlcPS3).Entity;
-                var hlcStruct4 = context.ProgramStructure.Add(hlcPS4).Entity;
+                var rtcStruct1 = context.ProgramStructures.Add(rtcPS1).Entity;
+                var rtcStruct2 = context.ProgramStructures.Add(rtcPS2).Entity;
+                var bccStruct1 = context.ProgramStructures.Add(bccPS1).Entity;
+                var bccStruct2 = context.ProgramStructures.Add(bccPS2).Entity;
+                var grccStruct1 = context.ProgramStructures.Add(grccPS1).Entity;
+                var grccStruct2 = context.ProgramStructures.Add(grccPS2).Entity;
+                var grccStruct3 = context.ProgramStructures.Add(grccPS3).Entity;
+                var grccStruct4 = context.ProgramStructures.Add(grccPS4).Entity;
+                var hlcStruct1 = context.ProgramStructures.Add(hlcPS1).Entity;
+                var hlcStruct2 = context.ProgramStructures.Add(hlcPS2).Entity;
+                var hlcStruct3 = context.ProgramStructures.Add(hlcPS3).Entity;
+                var hlcStruct4 = context.ProgramStructures.Add(hlcPS4).Entity;
 
 
                 context.SaveChanges();

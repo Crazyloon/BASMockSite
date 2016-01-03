@@ -20,6 +20,10 @@ textarea{
     min-height: 100px;
 }
 
+.page-header{
+    background-color:#5de164;
+    padding: 0 12px 0 12px;
+}
 
 /* Carousel */
 .carousel-image{
@@ -48,33 +52,168 @@ textarea{
         font-size: 14px;
         line-height: 1.2;
     }
+
+    
 }
 
+@media (min-width: 1200px){
+    .degree-container{
+        margin: 12px 0px 0px 15px;
+        width:48%;
+        min-height: 550px;
+    }
+}
+
+@media (min-width: 991px){
+    .degree-summary{
+        padding: 0px 12px 6px 0px;
+    }
+}
+
+/* DEGREE STYLING */
 .degree-container{
     border: 2px solid black;
-    border-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
     display: inline-block;
-    margin-bottom: 15px;
-    margin-right: 5px;
-    margin-left: 5px;
-}
-@media (min-width: 1200px){
-    .degree-container{width:49.1%;}
+    margin-bottom: 6px;
+        
 }
 
 .degree-titlebar{
-    border: 1px solid red;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+    margin-bottom: 12px;
+    background-color: #ffd800;
+    vertical-align: middle;
 }
 
-.degree-summary{
-    border: 1px solid green;
+.degree-title-school-logo{
+    
+}
+
+img.degree-school-logo{
+    float:right;
+
+    min-height: 50px;
+    max-width: 100%;
+    max-height: 75px;
+    
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 1px solid black;
+    
+}
+
+.degree-title-info{
+    padding-top: 6px;
+    font-size: 18px;
+    font-weight:600;
+}
+
+.degree-summary{ 
+    padding: 0px 0px 6px 0px;
 }
 
 .degree-details{
-    border: 1px solid blue;
+    padding: 0 0 6px 6px;
+    overflow: auto;
 }
 
+.degree-details-top{
+    padding: 0px 0px 12px 0px;
+    min-height:33%;
+    
+}
+
+.degree-details-middle{
+    padding: 0px 0px 12px 0px;
+    min-height: 33%;
+}
+
+.degree-details-bottom{
+    padding: 0px 0px 12px 0px;
+    min-height:33%;
+}
+
+/*COLLEGE STYLING*/
+@media (max-width: 480px){
+    .college-logo{
+        width: 100%;
+        max-height:120px;
+    }
+}
+@media (min-width: 1200px){
+    .college-container{
+        margin: 12px 0px 0px 15px;
+        width:48%;
+        min-height: 420px;
+    }
+    .college-logo{
+        max-width:100%;
+    }
+}
+
+@media (min-width: 991px) {
+    .college-details{
+        border-right: 2px solid;
+    }
+}
+@media (max-width: 991px) {
+    .college-details{
+        border-bottom: 2px solid;
+    }
+}
+.college-container{
+    display: inline-block;
+    padding:0;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    background-color: #efe4b0
+}
+.college-titlebar{
+    border-bottom: 1px solid black;
+    padding:2px;
+    background-color: #fff;
+}
+.college-titlebar-tuition{
+    display:inline;
+    float:right;
+}
+.college-details{
+    padding:2px;
+    overflow:auto;
+}
+.college-details-container{
+    padding:0;
+}
+.college-details-address{
+    padding:0;
+    margin:0;
+}
+.college-details-contact{
+    padding:0;
+}
+.college-info{
+    padding:0;
+    overflow: auto;
+}
+.college-logo{
+    
+    max-height: 76px;
+}
+.college-degrees-list{
+    padding: 2px;
+    overflow: auto;
+}
+
+.form-horizontal{
+    margin-left: 4px;
+}
 /*??????? DEV TESTING CSS ???????*/
-div{border:1px solid black;}
+/*div{border:1px solid black;}*/
 
 

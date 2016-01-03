@@ -1,0 +1,124 @@
+@model IEnumerable<BASMockSite.Models.College>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-header">
+    <h2 style="text-align:center;">Puget Sound Community Colleges Offering Bachelors of Applied Science Degrees</h2>
+    <p>
+        Below is a list of every community college in the Puget Sound region, which is offering a Bachelors of Applied Science Degree.* Colleges are listed in the order they
+        were added, but you can use the browse function to refine your search results 
+
+    </p>
+    <p>
+        The ability to create a new college is given only to BAS_Admins. <br />
+        The ability to create a new college will be moved to an admin page later. <br />
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
+    
+@{ await Html.RenderPartialAsync("_SchoolPartial", Model);  }
+
+<div style="text-align: right;">
+    <br /><br />
+    <p>Page currently in development*</p>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".college-phone").text(function (i, text) {
+                return text.replace(/(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
+            })
+        })
+    </script>
+}
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Accredited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.County)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeWebAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tuition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accredited)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.County)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeWebAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tuition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zip)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.SchoolID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.SchoolID">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.SchoolID">Delete</a>
+        </td>
+    </tr>
+}
+</table>*@

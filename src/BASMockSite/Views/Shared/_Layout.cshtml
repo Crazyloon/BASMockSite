@@ -22,36 +22,39 @@
 
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">Achieve BAS</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li><a asp-controller="Schools" asp-action="Index">Schools</a></li>
-                        <li><a asp-controller="Degrees" asp-action="Index">Degrees</a></li>
-                        <li><a asp-controller="Browse" asp-action="Index">Browse</a></li>
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
+        <div id="wrapper"style="min-height:100%">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a asp-controller="Home" asp-action="Index" class="navbar-brand">Achieve BAS</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="About">About</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                            <li><a asp-controller="Schools" asp-action="Index">Schools</a></li>
+                            <li><a asp-controller="Degrees" asp-action="Index">Degrees</a></li>
+                            <li><a asp-controller="Browse" asp-action="Index">Browse</a></li>
+                        </ul>
+                        @await Html.PartialAsync("_LoginPartial")
+                    </div>
                 </div>
             </div>
+
+            <div id="content-container" class="container body-content">
+                @RenderBody()
+            </div>
+            <div class="panel-footer" style="bottom: 0px; margin-top:12px; color:#fff; background-color: #1532bf; position: relative; width:100%">
+                <p>&copy; 2015 - BASMockSite <span style="text-align:right"></span></p>
+            </div>
         </div>
-        <div id="content-container" class="container body-content">
-            @RenderBody()
-        </div>
-        <footer class="panel-footer" style="bottom: 0px; margin-top:12px; color:#fff; background-color: #1532bf">
-            <p>&copy; 2015 - BASMockSite <span style="text-align:right"></span></p>
-        </footer>
 
         <environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>

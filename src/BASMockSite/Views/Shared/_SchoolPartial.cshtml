@@ -1,0 +1,54 @@
+@model IEnumerable<BASMockSite.Models.College>
+
+
+@foreach (var school in Model)
+{
+    <div class="college-container col-xs-12 col-sm-12 col-md-12 col-lg-6" >
+        <div class="college-titlebar col-xs-12">
+            <img class="college-logo" stlye="float: left;" src="@Url.Action("GetSchoolLogo", "Schools", new { schoolID = school.CollegeID })" alt="School Logo" />
+            <br />
+            @Html.DisplayFor(s => school.Name) <div class="college-titlebar-tuition">Tutition: @Html.DisplayFor(s => school.Tuition)</div>
+        </div>
+        <div class="college-details col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="college-details-container col-xs-12 col-sm-4 col-md-12 col-md-12">
+                <div class="college-details-address col-xs-12 col-sm-12 col-md-7 col-lg-12">
+                    <p>
+                        @Html.DisplayFor(s => school.Address)<br />
+                        @Html.DisplayFor(s => school.City), @Html.DisplayFor(s => school.State)<br />
+                        @Html.DisplayFor(s => school.Zip)
+                    </p>
+                </div>
+                <div class="college-details-contact col-xs-12 col-sm-12 col-md-7 col-lg-12">
+                    <p>
+                        <span class="college-phone">@school.MainPhone</span>
+                        <br />
+                        <a href="@school.HomeWebAddress">Home Page</a>
+                    </p>
+                </div>
+            </div>
+            <div class="college-info col-xs-12 col-sm-8 col-md-12 col-lg-12">                
+                <p class="college-description">
+                    @Html.DisplayFor(s => school.Description)
+                </p>
+            </div>
+        </div>
+        
+        <div class="college-degrees-list col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div style="width:100%; font-weight:600;">Degrees Offered:</div>
+            @foreach (var degree in school.Degrees)
+            {
+                <a asp-action="Details" asp-route-id="@degree.DegreeID" asp-controller="Degrees">@Html.DisplayFor(d => degree.Name)</a>
+                <br />
+            }
+            
+        </div>
+        <div class="col-xs-12" style="border-top: 2px solid black;">
+            <div class="btn-group-justified">
+                <a asp-action="Edit" asp-route-id="@school.CollegeID" class="btn btn-default" style="border: 1px solid white;">Edit</a>
+                <a asp-action="Details" asp-route-id="@school.CollegeID" class="btn btn-default" style="border: 1px solid white;">Details</a>
+            </div>
+        </div>
+    </div>
+        
+    
+}

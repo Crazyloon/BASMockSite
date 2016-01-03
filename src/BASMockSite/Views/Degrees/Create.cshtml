@@ -4,37 +4,65 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
-
+<h2>Create New Degree</h2>
+<hr />
+<p style="background-color:#b6ff00; padding: 4px; border-top: 1px solid blue; border-bottom: 2px solid blue;">
+    Fill out the degree information below and select a manager and school for it to be associated with. (Later the ManagerID and SchoolID will be hidden fields, populated by the controler)
+</p>
 <form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>Degree</h4>
-        <hr />
+    <div class="form-horizontal">        
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Degree Title</label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdmissionsSummary" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="AdmissionsSummary" class="form-control" ></textarea>
+                <span asp-validation-for="AdmissionsSummary" class="text-danger" />
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" ></textarea>
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ProgramURL" class="col-md-2 control-label"></label>
+            <label class="col-md-2 control-label">Program Manager</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ProgramManagerID", ViewBag.ManagerID as SelectList,"Select Manager", new { @class = "form-control", id ="Manager"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Program URL</label>
             <div class="col-md-10">
                 <input asp-for="ProgramURL" class="form-control" />
                 <span asp-validation-for="ProgramURL" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <label asp-for="RequiredCredits" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger" />
+                <input asp-for="RequiredCredits" class="form-control" />
+                <span asp-validation-for="RequiredCredits" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Offering College</label>
+            <div class="col-md-10">
+                @*<input id="College" class="form-control disabled" type="text" value="Based on Program Manager" disabled />*@
+                @Html.DropDownList("CollegeID", ViewBag.SchoolID as SelectList, "Select College", new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -48,4 +76,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @*<script>
+        $(document).load(function () {
+            $("#Manager").on(onchange).load(@Url.Action("GetPMCollege", "Degrees"))
+        })
+    </script>*@
 }

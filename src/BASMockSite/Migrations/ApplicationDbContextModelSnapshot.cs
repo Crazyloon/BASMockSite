@@ -66,20 +66,71 @@ namespace BASMockSite.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
                 });
 
+            modelBuilder.Entity("BASMockSite.Models.College", b =>
+                {
+                    b.Property<int>("CollegeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Accredited");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 32);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<string>("County")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 2000);
+
+                    b.Property<string>("HomeWebAddress")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Logo");
+
+                    b.Property<string>("MainPhone")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<decimal>("Tuition");
+
+                    b.Property<string>("Zip")
+                        .IsRequired();
+
+                    b.HasKey("CollegeID");
+                });
+
             modelBuilder.Entity("BASMockSite.Models.Degree", b =>
                 {
                     b.Property<int>("DegreeID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdmissionsSummary")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<int>("CollegeID");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 2000);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 128);
 
                     b.Property<int>("ProgramManagerID");
 
@@ -88,9 +139,26 @@ namespace BASMockSite.Migrations
 
                     b.Property<int>("RequiredCredits");
 
-                    b.Property<int>("SchoolID");
-
                     b.HasKey("DegreeID");
+                });
+
+            modelBuilder.Entity("BASMockSite.Models.Image", b =>
+                {
+                    b.Property<int>("ImageID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Alt");
+
+                    b.Property<string>("Caption");
+
+                    b.Property<int>("CollegeID");
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired();
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("ImageID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
@@ -112,12 +180,18 @@ namespace BASMockSite.Migrations
                     b.Property<int>("ManagerID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CollegeID");
+
                     b.Property<string>("Email")
                         .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 128);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 10);
 
                     b.HasKey("ManagerID");
                 });
@@ -130,52 +204,13 @@ namespace BASMockSite.Migrations
                     b.Property<string>("ProgramDuration")
                         .IsRequired();
 
+                    b.Property<int?>("ProgramEntryEntryID");
+
                     b.Property<int>("ProgramEntrylID");
 
                     b.Property<int>("Structure");
 
                     b.HasKey("ProgramStructureID");
-                });
-
-            modelBuilder.Entity("BASMockSite.Models.School", b =>
-                {
-                    b.Property<int>("SchoolID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Accredited");
-
-                    b.Property<string>("Address")
-                        .IsRequired();
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("County")
-                        .IsRequired();
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<string>("HomeWebAddress")
-                        .IsRequired();
-
-                    b.Property<byte[]>("Logo");
-
-                    b.Property<string>("MainPhone")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("State")
-                        .IsRequired();
-
-                    b.Property<decimal>("Tuition");
-
-                    b.Property<string>("Zip")
-                        .IsRequired();
-
-                    b.HasKey("SchoolID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
@@ -262,13 +297,20 @@ namespace BASMockSite.Migrations
 
             modelBuilder.Entity("BASMockSite.Models.Degree", b =>
                 {
+                    b.HasOne("BASMockSite.Models.College")
+                        .WithMany()
+                        .HasForeignKey("CollegeID");
+
                     b.HasOne("BASMockSite.Models.ProgramManager")
                         .WithMany()
                         .HasForeignKey("ProgramManagerID");
+                });
 
-                    b.HasOne("BASMockSite.Models.School")
+            modelBuilder.Entity("BASMockSite.Models.Image", b =>
+                {
+                    b.HasOne("BASMockSite.Models.College")
                         .WithMany()
-                        .HasForeignKey("SchoolID");
+                        .HasForeignKey("CollegeID");
                 });
 
             modelBuilder.Entity("BASMockSite.Models.ProgramEntry", b =>
@@ -278,11 +320,18 @@ namespace BASMockSite.Migrations
                         .HasForeignKey("DegreeID");
                 });
 
+            modelBuilder.Entity("BASMockSite.Models.ProgramManager", b =>
+                {
+                    b.HasOne("BASMockSite.Models.College")
+                        .WithMany()
+                        .HasForeignKey("CollegeID");
+                });
+
             modelBuilder.Entity("BASMockSite.Models.ProgramStructure", b =>
                 {
                     b.HasOne("BASMockSite.Models.ProgramEntry")
                         .WithMany()
-                        .HasForeignKey("ProgramEntrylID");
+                        .HasForeignKey("ProgramEntryEntryID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

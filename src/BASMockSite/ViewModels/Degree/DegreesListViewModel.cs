@@ -13,9 +13,9 @@ namespace BASMockSite.ViewModels.Degree
         [Key]
         public int DegreeID { get; set; }
         //FK
-        [ForeignKey("ProgramManager")]
+        [ForeignKey("ProgramManagers")]
         public int ProgramManagerID { get; set; }
-        [ForeignKey("School")]
+        [ForeignKey("College")]
         public int SchoolID { get; set; }
 
         [Required]
@@ -42,6 +42,9 @@ namespace BASMockSite.ViewModels.Degree
 
         [Required]
         public string ProgramManagerName { get; set; }
+
+        [Required]
+        public string ProgramManagerEmail { get; set; }
 
         public List<BASMockSite.Models.ProgramEntry> ProgramEntries { get; set; }
         

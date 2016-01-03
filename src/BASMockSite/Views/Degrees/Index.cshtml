@@ -4,14 +4,51 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <h2 style="text-align:center;">Community College Bachelors of Applied Science Degrees</h2>
+    <p>
+        Below is a list of every availible BAS degree in the Puget Sound region.* Degrees here are listed in the order in which they were added to this page,
+        but you can use the browse function to narrow the list down to only the degrees that interest you and fit your needs.
 
-<p>
-    The ability to create a new degree is given only to BAS_Admins. <br />
-    The ability to create a new degree will be moved to an admin page later. <br />
-    <a asp-action="Create">Create New</a>
-</p>
-
-<div class="col-xs-12">
-    @{ await Html.RenderPartialAsync("_DegreePartial", Model);  }
+    </p>
+    <p>
+        The ability to create a new degree is given only to BAS_Admins. <br />
+        The ability to create a new degree will be moved to an admin page later. <br />
+        <a asp-action="Create">Create New</a>
+    </p>
 </div>
+
+@{ await Html.RenderPartialAsync("_DegreePartial", Model);  }
+
+<div style="text-align: right; width:100%;">
+    <p>Page currently in development*</p>
+</div>
+
+@*@section Scripts{
+    <script>       
+        function sizeContainers()
+        {
+            if ($(window).width > 200) {
+                var sameHeightTop = $(".equal_height_parent");
+                if (sameHeightTop.length !== 0) {
+                    sameHeightTop.each(function () {
+                        var tallest = 0;
+                        var sameHeightChildren = $(this).find(".equal_height_child");
+                        sameHeightChildren.each(function () {
+                            var thisHeight = $(this).height();
+                            if (thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        sameHeightChildren.height(tallest);
+                    });
+                }
+            }
+        }
+        $(document).ready(sizeContainers);
+        //$(document).ready(function () {
+        //    $(window).resize(sizeContainers);
+        //});
+        
+    </script>
+}*@

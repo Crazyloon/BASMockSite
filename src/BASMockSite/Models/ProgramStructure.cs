@@ -13,15 +13,15 @@ namespace BASMockSite.Models
         [Key]
         public int ProgramStructureID { get; set; }
         //FK
-        [ForeignKey("ProgramEntry")]
+        [ForeignKey("ProgramEntries")]
         public int ProgramEntrylID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select a course structure from the list")]
         public CourseStructure Structure { get; set; }
 
         // Like: 6 quarters
         [Required]
-        [Display(Name = "Program Length")]
+        [Display(Name = "Program Length", Description = "The number of quarters a typical student attends class in order to earn a degree.")]
         public string ProgramDuration { get; set; }
 
         // Navigation Property

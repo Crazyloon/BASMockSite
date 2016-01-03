@@ -37,7 +37,7 @@
             
             <label asp-for="ProgramManagerID" class="control-label col-md-2">Program Manager</label>
             <div class="col-md-10">
-                @Html.DropDownList("ManagerID", ViewBag.ManagerID as SelectList, new { @class = "form-control" })
+                @Html.DropDownList("ProgramManagerID", ViewBag.ManagerID as SelectList, new { @class = "form-control" })
                 <span asp-validation-for="ProgramManagerID" class="text-danger" />
             </div>
         </div>
@@ -57,10 +57,10 @@
         </div>
         <div class="form-group">
             
-            <label asp-for="SchoolID" class="control-label col-md-2">School</label>
+            <label asp-for="CollegeID" class="control-label col-md-2">School</label>
             <div class="col-md-10">
-                @Html.DropDownList("SchoolID", ViewBag.SchoolID as SelectList, new { @class = "form-control" })
-                <span asp-validation-for="SchoolID" class="text-danger" />
+                @Html.DropDownList("CollegeID", ViewBag.SchoolID as SelectList, new { @class = "form-control" })
+                <span asp-validation-for="CollegeID" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

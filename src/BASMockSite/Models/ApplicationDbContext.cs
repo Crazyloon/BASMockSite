@@ -16,11 +16,31 @@ namespace BASMockSite.Models
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            //builder.Entity<ProgramManagers>()
+            //    .HasOne(p => p.College)
+            //    .WithMany(s => s.ProgramManagers)
+            //    .HasForeignKey(p => p.CollegeID)
+            //    .OnDelete(Microsoft.Data.Entity.Metadata.DeleteBehavior.Restrict);
+
+            //builder.Entity<ProgramManagers>()
+            //    .HasMany("Degrees")
+            //    .WithOne("ProgramManagers")
+            //    .HasForeignKey("ProgramManagerID")
+            //    .OnDelete(Microsoft.Data.Entity.Metadata.DeleteBehavior.Restrict);
+
+            //builder.Entity<Degrees>()
+            //    .HasOne(d => d.ProgramManagers)
+            //    .WithMany(pm => pm.Degrees)
+            //    .HasForeignKey(d => d.ProgramManagerID)
+            //    .OnDelete(Microsoft.Data.Entity.Metadata.DeleteBehavior.Restrict);
         }
-        public DbSet<School> School { get; set; }
-        public DbSet<Degree> Degree { get; set; }
-        public DbSet<ProgramStructure> ProgramStructure { get; set; }
-        public DbSet<ProgramEntry> ProgramEntry { get; set; }
-        public DbSet<ProgramManager> ProgramManager { get; set; }
+        public DbSet<College> Colleges { get; set; }
+        public DbSet<Degree> Degrees { get; set; }
+        public DbSet<ProgramStructure> ProgramStructures { get; set; }
+        public DbSet<ProgramEntry> ProgramEntries { get; set; }
+        public DbSet<ProgramManager> ProgramManagers { get; set; }
+        public DbSet<Image> Images { get; set; }
+
     }
 }

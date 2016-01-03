@@ -19,7 +19,8 @@ namespace BASMockSite.Controllers
         // GET: Degrees
         public IActionResult Index()
         {
-            List<Degree> degrees = _context.Degree.Include(d => d.ProgramManager).Include(d => d.School).ToList();
+            List<Degree> degrees = _context.Degrees.Include(d => d.ProgramManager).Include(d => d.College).ToList();
+            List<ProgramEntry> entries = _context.ProgramEntries.Include(pe => pe.Structures).ToList();
             var dlvm = new List<BASMockSite.ViewModels.Degree.DegreesListViewModel>();
 
             int i = 0;
@@ -29,24 +30,19 @@ namespace BASMockSite.Controllers
 
                 dlvm[i].DegreeID = degree.DegreeID;
                 dlvm[i].ProgramManagerID = degree.ProgramManagerID;
-                dlvm[i].SchoolID = degree.SchoolID;
+                dlvm[i].SchoolID = degree.CollegeID;
 
                 dlvm[i].DegreeName = degree.Name;
                 dlvm[i].AdmissionsSummary = degree.AdmissionsSummary;
                 dlvm[i].DegreeDescription = degree.Description;
                 dlvm[i].ProgramURL = degree.ProgramURL;
                 dlvm[i].ProgramManagerName = degree.ProgramManager.Name;
-                dlvm[i].SchoolName = degree.School.Name;
-                dlvm[i].ProgramEntries = _context.ProgramEntry.Include(pe => pe.Structures).Where(pe => pe.DegreeID == degree.DegreeID).ToList();
+                dlvm[i].ProgramManagerEmail = degree.ProgramManager.Email;
+                dlvm[i].SchoolName = degree.College.Name;
+                dlvm[i].ProgramEntries = entries.Where(pe => pe.DegreeID == degree.DegreeID).ToList();
 
                 i++;
             }
-
-
-            //var degrees = _context.Degree.Include(d => d.School).Include(d => d.ProgramManager).Include(d => d.ProgramEntries).ToList();
-            //var degreeStructures = _context.ProgramStructure.ToList();
-
-            //ViewBag.EntryStructures = degreeStructures;
             
             return View(dlvm);
         }
@@ -59,7 +55,7 @@ namespace BASMockSite.Controllers
                 return HttpNotFound();
             }
 
-            Degree degree = _context.Degree.Single(m => m.DegreeID == id);
+            Degree degree = _context.Degrees.Single(m => m.DegreeID == id);
             if (degree == null)
             {
                 return HttpNotFound();
@@ -71,6 +67,8 @@ namespace BASMockSite.Controllers
         // GET: Degrees/Create
         public IActionResult Create()
         {
+            ViewBag.ManagerID = new SelectList(_context.ProgramManagers.ToList(), "ManagerID", "Name");
+            ViewBag.SchoolID = new SelectList(_context.Colleges.ToList(), "CollegeID", "Name");
             return View();
         }
 
@@ -81,10 +79,14 @@ namespace BASMockSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Degree.Add(degree);
+                _context.Degrees.Add(degree);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.ManagerID = new SelectList(_context.ProgramManagers.ToList(), "ManagerID", "Name", degree.ProgramManagerID);
+            ViewBag.SchoolID = new SelectList(_context.Colleges.ToList(), "CollegeID", "Name", degree.CollegeID);
+
             return View(degree);
         }
 
@@ -96,14 +98,15 @@ namespace BASMockSite.Controllers
                 return HttpNotFound();
             }
 
-            Degree degree = _context.Degree.Single(m => m.DegreeID == id);
+            Degree degree = _context.Degrees.Single(m => m.DegreeID == id);
+            //degree.College = _context.College.Where(s => s.CollegeID == degree.CollegeID).SingleOrDefault();
             if (degree == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.ManagerID = new SelectList(_context.ProgramManager.ToList(), "ManagerID", "Name");
-            ViewBag.SchoolID = new SelectList(_context.School.ToList(), "SchoolID", "Name");
+            ViewBag.ManagerID = new SelectList(_context.ProgramManagers.ToList(), "ManagerID", "Name", degree.ProgramManagerID);
+            ViewBag.SchoolID = new SelectList(_context.Colleges.ToList(), "CollegeID", "Name", degree.CollegeID);
 
             return View(degree);
         }
@@ -119,6 +122,10 @@ namespace BASMockSite.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.ManagerID = new SelectList(_context.ProgramManagers.ToList(), "ManagerID", "Name", degree.ProgramManagerID);
+            ViewBag.SchoolID = new SelectList(_context.Colleges.ToList(), "CollegeID", "Name", degree.CollegeID);
+
             return View(degree);
         }
 
@@ -131,7 +138,7 @@ namespace BASMockSite.Controllers
                 return HttpNotFound();
             }
 
-            Degree degree = _context.Degree.Single(m => m.DegreeID == id);
+            Degree degree = _context.Degrees.Single(m => m.DegreeID == id);
             if (degree == null)
             {
                 return HttpNotFound();
@@ -145,8 +152,8 @@ namespace BASMockSite.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            Degree degree = _context.Degree.Single(m => m.DegreeID == id);
-            _context.Degree.Remove(degree);
+            Degree degree = _context.Degrees.Single(m => m.DegreeID == id);
+            _context.Degrees.Remove(degree);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
