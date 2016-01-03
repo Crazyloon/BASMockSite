@@ -6,15 +6,30 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using Microsoft.AspNet.Identity;
 
 namespace BASMockSite.Models
 {
     public class TestDataInitializer
     {
+        private UserManager<ApplicationUser> _userManager;
+
+        public TestDataInitializer(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+
             var context = serviceProvider.GetService<ApplicationDbContext>();
             context.Database.Migrate();
+
+            //if (await userManager.FindByEmailAsync("") == null)
+            //{
+
+            //}
 
             if (!context.School.Any())
             {
@@ -48,9 +63,11 @@ namespace BASMockSite.Models
                 {
                     Name = "Stefanie McIrvin",
                     Email = "smcirvin@rtc.edu",
+                    Phone = "4253252352",
+                    CollegeID = 1,
                 };
 
-                School rtc = new School
+                College rtc = new College
                 {
                     Name = "Renton Technical College",
                     Address = "3000 NE 4th Street",
@@ -75,14 +92,14 @@ namespace BASMockSite.Models
                     AdmissionsSummary = "Admission is selective. Applications are due April 1st for the following fall entry. Applicants are notified by mail of a decision between late April and early May.",
                     ProgramURL = "http://www.rtc.edu/appdev",
                     ProgramManagerID = 1,
-                    SchoolID = 1,
+                    CollegeID = 1,
                     RequiredCredits = 90,
-                    //School = rtc,
+                    //College = rtc,
                     //ProgramManager = rtcSM,
                     //ProgramEntries = { rtcFall }
                 };
 
-                //var rentonTech = context.School.Add(rtc).Entity;
+                //var rentonTech = context.College.Add(rtc).Entity;
                 //var rtcManager = context.ProgramManager.Add(rtcSM).Entity;
                 //var rtcDeg = context.Degree.Add(rtcBASAppDev).Entity;
                 //var rtcEntry = context.ProgramEntry.Add(rtcFall).Entity;
@@ -107,9 +124,11 @@ namespace BASMockSite.Models
                 {
                     Name = "Shanon Reedy",
                     Email = "shanon.reedy@bellevuecollege.edu",
+                    Phone = "4255643189",
+                    CollegeID = 2,
                 };
 
-                School bcc = new School
+                College bcc = new College
                 {
                     Name = "Bellevue Community College",
                     Address = "3000 Landerholm Circle SE",
@@ -134,15 +153,15 @@ namespace BASMockSite.Models
                     AdmissionsSummary = "Applications are available beginning each January for the following fall entry.",
                     ProgramURL = "http://www.bellevuecollege.edu/programs/degrees/bachelor/da/",
                     ProgramManagerID = 2,
-                    SchoolID = 2,
+                    CollegeID = 2,
                     RequiredCredits = 90,
-                    //School = bcc,
+                    //College = bcc,
                     //ProgramManager = bccSR,
                     //ProgramEntries = { bccFall }
                 };
 
 
-                //var bellevueCC = context.School.Add(bcc).Entity;                
+                //var bellevueCC = context.College.Add(bcc).Entity;                
                 //var bccManager = context.ProgramManager.Add(bccSR).Entity;
                 //var bccDeg = context.Degree.Add(bccDatAn).Entity;
                 //var bccEntry = context.ProgramEntry.Add(bccFall).Entity;                
@@ -177,9 +196,11 @@ namespace BASMockSite.Models
                 {
                     Name = "Sheila Capps",
                     Email = "scapps@greenriver.edu",
+                    Phone = "2538339111",
+                    CollegeID = 3,
                 };
 
-                School grcc = new School
+                College grcc = new College
                 {
                     Name = "Green River Community College",
                     Address = "12401 SE 320th Street",
@@ -204,15 +225,15 @@ namespace BASMockSite.Models
                     AdmissionsSummary = "Rolling Admissions, always accepting applications on a first come, first serve basis.",
                     ProgramURL = "http://www.greenriver.edu/academics/areas-of-study/bas-programs/network-administration-and-security.htm",
                     ProgramManagerID = 3,
-                    SchoolID = 3,
+                    CollegeID = 3,
                     RequiredCredits = 90,
-                    //School = grcc,
+                    //College = grcc,
                     //ProgramManager = grccSC,
                     //ProgramEntries = { grccWint }
                 };
 
                 
-                //var GreenRiverCC = context.School.Add(grcc).Entity;
+                //var GreenRiverCC = context.College.Add(grcc).Entity;
                 //var grccManager = context.ProgramManager.Add(grccSC).Entity;                
                 //var grccDeg = context.Degree.Add(grccNetAd).Entity;
                 //var grccEntryFall = context.ProgramEntry.Add(grccFall).Entity;
@@ -248,9 +269,11 @@ namespace BASMockSite.Models
                 {
                     Name = "Tanya Powers",
                     Email = "tpowers@highline.edu",
+                    Phone = "2065923662",
+                    CollegeID = 4,
                 };
 
-                School hlc = new School
+                College hlc = new College
                 {
                     Name = "Highline College",
                     Address = "2400 S 240th St",
@@ -275,15 +298,15 @@ namespace BASMockSite.Models
                     AdmissionsSummary = "Applications are due each June 30th for the following fall and spring entry dates. After June 30, any remaining spaces will be filled with eligible applicants in the order received until the program is full.",
                     ProgramURL = "http://www.highline.edu/bas/cybersecurity/",
                     ProgramManagerID = 4,
-                    SchoolID = 4,
+                    CollegeID = 4,
                     RequiredCredits = 90,
-                    //School = hlc,
+                    //College = hlc,
                     //ProgramManager = hlcTP,
                     //ProgramEntries = { hlcFall, hlcSpring }
                 };
 
-                
-                //var highlineC = context.School.Add(hlc).Entity;
+
+                //var highlineC = context.College.Add(hlc).Entity;
                 //var hlcManager = context.ProgramManager.Add(hlcTP).Entity;
                 //var hlcDeg = context.Degree.Add(hlcCyberFor).Entity;
                 //var hlcEntryFall = context.ProgramEntry.Add(hlcFall).Entity;
@@ -293,7 +316,43 @@ namespace BASMockSite.Models
                 //var hlcStruct3 = context.ProgramStructure.Add(hlcPS3).Entity;
                 //var hlcStruct4 = context.ProgramStructure.Add(hlcPS4).Entity;
 
-
+                List<Image> imgList = new List<Image>
+                {
+                    new Image{
+                        CollegeID = 1,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic1.jpg",
+                    },
+                    new Image
+                    {
+                        CollegeID = 1,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic2.jpg",
+                    },
+                    new Image
+                    {
+                        CollegeID = 1,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic3.jpg",
+                    },
+                    new Image
+                    {
+                        CollegeID = 1,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic4.jpg",
+                    },
+                    new Image
+                    {
+                        CollegeID = 1,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic5.jpg",
+                    },
+                    new Image
+                    {
+                        CollegeID = 2,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic6.jpg",
+                    },
+                    new Image
+                    {
+                        CollegeID = 2,
+                        ImageURL = "~\\wwwroot\\uploads\\images\\pic7.jpg",
+                    }
+                };
 
                 var rentonTech = context.School.Add(rtc).Entity;
                 var bellevueCC = context.School.Add(bcc).Entity;
@@ -301,6 +360,10 @@ namespace BASMockSite.Models
                 var highlineC = context.School.Add(hlc).Entity;
 
                 context.SaveChanges();
+
+                //
+                imgList.ForEach(img => context.Image.Add(img));
+                //
 
                 var rtcManager = context.ProgramManager.Add(rtcSM).Entity;
                 var bccManager = context.ProgramManager.Add(bccSR).Entity;
