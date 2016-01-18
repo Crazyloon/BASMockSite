@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using BASMockSite.Models;
+using BASMockSite.ViewModels.BASManagers;
 
 namespace BASMockSite.Models
 {
@@ -41,6 +42,7 @@ namespace BASMockSite.Models
         public DbSet<ProgramEntry> ProgramEntries { get; set; }
         public DbSet<ProgramManager> ProgramManagers { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<BASMenu> BASMenu { get; set; }
 
     }
 }

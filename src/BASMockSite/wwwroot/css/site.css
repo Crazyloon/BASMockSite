@@ -33,6 +33,7 @@ textarea{
 }
 .carousel-caption {
     z-index: 10 !important;
+    position: absolute;
 }
 
     .carousel-caption p {
@@ -210,9 +211,33 @@ img.degree-school-logo{
     overflow: auto;
 }
 
+
 .form-horizontal{
     margin-left: 4px;
 }
+
+
+a.tooltip-custom{
+    color: black;
+}
+
+a.tooltip-custom:hover{
+    color:#252526;
+}
+
+a.tooltip-custom:visited{
+    color:black;
+}
+
+
+
+
+
+
+
+
+
+
 /*??????? DEV TESTING CSS ???????*/
 /*div{border:1px solid black;}*/
 
