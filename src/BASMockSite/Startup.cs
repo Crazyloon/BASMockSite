@@ -110,12 +110,14 @@ namespace BASMockSite
             });
 
 
-            // USE THIS FOR DEVELOPMENT PURPOSES ONLY
-            if (env.IsDevelopment())
-            {
-                TestDataInitializer.Initialize(app.ApplicationServices);
-            }
-            
+            TestDataInitializer.Initialize(app.ApplicationServices);
+
+            //// USE THIS FOR DEVELOPMENT PURPOSES ONLY
+            //if (env.IsDevelopment())
+            //{
+            //    TestDataInitializer.Initialize(app.ApplicationServices);
+            //}
+
         }
 
         // Entry point for the application.

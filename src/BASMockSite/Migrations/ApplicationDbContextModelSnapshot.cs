@@ -204,13 +204,20 @@ namespace BASMockSite.Migrations
                     b.Property<string>("ProgramDuration")
                         .IsRequired();
 
-                    b.Property<int?>("ProgramEntryEntryID");
-
-                    b.Property<int>("ProgramEntrylID");
+                    b.Property<int>("ProgramEntryID");
 
                     b.Property<int>("Structure");
 
                     b.HasKey("ProgramStructureID");
+                });
+
+            modelBuilder.Entity("BASMockSite.ViewModels.BASManagers.BASMenu", b =>
+                {
+                    b.Property<int>("ManagerID");
+
+                    b.Property<int?>("CollegeCollegeID");
+
+                    b.HasKey("ManagerID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
@@ -331,7 +338,18 @@ namespace BASMockSite.Migrations
                 {
                     b.HasOne("BASMockSite.Models.ProgramEntry")
                         .WithMany()
-                        .HasForeignKey("ProgramEntryEntryID");
+                        .HasForeignKey("ProgramEntryID");
+                });
+
+            modelBuilder.Entity("BASMockSite.ViewModels.BASManagers.BASMenu", b =>
+                {
+                    b.HasOne("BASMockSite.Models.College")
+                        .WithMany()
+                        .HasForeignKey("CollegeCollegeID");
+
+                    b.HasOne("BASMockSite.Models.ProgramManager")
+                        .WithMany()
+                        .HasForeignKey("ManagerID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

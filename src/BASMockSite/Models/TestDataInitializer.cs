@@ -45,8 +45,8 @@ namespace BASMockSite.Models
                 //    new ProgramStructures { Structure = CourseStructure.Daily } // 6
                 //};
 
-                ProgramStructure rtcPS1 = new ProgramStructure { ProgramEntrylID = 1, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
-                ProgramStructure rtcPS2 = new ProgramStructure { ProgramEntrylID = 1, Structure = CourseStructure.Hybrid, ProgramDuration = "6 Quarters", };
+                ProgramStructure rtcPS1 = new ProgramStructure { ProgramEntryID = 1, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
+                ProgramStructure rtcPS2 = new ProgramStructure { ProgramEntryID = 1, Structure = CourseStructure.Hybrid, ProgramDuration = "6 Quarters", };
 
                 //ps.ForEach(p => context.ProgramStructures.Add(p));
                 //context.SaveChanges();
@@ -109,8 +109,8 @@ namespace BASMockSite.Models
 
                 ////////////////////
 
-                ProgramStructure bccPS1 = new ProgramStructure { ProgramEntrylID = 2, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
-                ProgramStructure bccPS2 = new ProgramStructure { ProgramEntrylID = 2, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
+                ProgramStructure bccPS1 = new ProgramStructure { ProgramEntryID = 2, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure bccPS2 = new ProgramStructure { ProgramEntryID = 2, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
 
                 ProgramEntry bccFall = new ProgramEntry
                 {
@@ -170,11 +170,11 @@ namespace BASMockSite.Models
 
                 ////////////////////
 
-                ProgramStructure grccPS1 = new ProgramStructure { ProgramEntrylID = 3, Structure = CourseStructure.FullTime, ProgramDuration = "6 Quarters", };
-                ProgramStructure grccPS2 = new ProgramStructure { ProgramEntrylID = 3, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure grccPS1 = new ProgramStructure { ProgramEntryID = 3, Structure = CourseStructure.FullTime, ProgramDuration = "6 Quarters", };
+                ProgramStructure grccPS2 = new ProgramStructure { ProgramEntryID = 3, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
 
-                ProgramStructure grccPS3 = new ProgramStructure { ProgramEntrylID = 4, Structure = CourseStructure.PartTime, ProgramDuration = "6 Quarters", };
-                ProgramStructure grccPS4 = new ProgramStructure { ProgramEntrylID = 4, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
+                ProgramStructure grccPS3 = new ProgramStructure { ProgramEntryID = 4, Structure = CourseStructure.PartTime, ProgramDuration = "6 Quarters", };
+                ProgramStructure grccPS4 = new ProgramStructure { ProgramEntryID = 4, Structure = CourseStructure.Evening, ProgramDuration = "6 Quarters", };
 
                 ProgramEntry grccFall = new ProgramEntry
                 {
@@ -243,11 +243,11 @@ namespace BASMockSite.Models
 
                 ////////////////////
 
-                ProgramStructure hlcPS1 = new ProgramStructure { ProgramEntrylID = 5, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
-                ProgramStructure hlcPS2 = new ProgramStructure { ProgramEntrylID = 5, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
+                ProgramStructure hlcPS1 = new ProgramStructure { ProgramEntryID = 5, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure hlcPS2 = new ProgramStructure { ProgramEntryID = 5, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
 
-                ProgramStructure hlcPS3 = new ProgramStructure { ProgramEntrylID = 6, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
-                ProgramStructure hlcPS4 = new ProgramStructure { ProgramEntrylID = 6, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
+                ProgramStructure hlcPS3 = new ProgramStructure { ProgramEntryID = 6, Structure = CourseStructure.Daytime, ProgramDuration = "6 Quarters", };
+                ProgramStructure hlcPS4 = new ProgramStructure { ProgramEntryID = 6, Structure = CourseStructure.Daily, ProgramDuration = "6 Quarters", };
 
                 ProgramEntry hlcFall = new ProgramEntry
                 {

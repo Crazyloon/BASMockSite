@@ -13,8 +13,8 @@ namespace BASMockSite.Models
         [Key]
         public int ProgramStructureID { get; set; }
         //FK
-        [ForeignKey("ProgramEntries")]
-        public int ProgramEntrylID { get; set; }
+        [ForeignKey("ProgramEntry")]
+        public int ProgramEntryID { get; set; }
 
         [Required(ErrorMessage = "Select a course structure from the list")]
         public CourseStructure Structure { get; set; }

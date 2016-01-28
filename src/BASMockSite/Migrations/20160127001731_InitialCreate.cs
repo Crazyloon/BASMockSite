@@ -226,6 +226,29 @@ namespace BASMockSite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
+                name: "BASMenu",
+                columns: table => new
+                {
+                    ManagerID = table.Column<int>(nullable: false),
+                    CollegeCollegeID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BASMenu", x => x.ManagerID);
+                    table.ForeignKey(
+                        name: "FK_BASMenu_College_CollegeCollegeID",
+                        column: x => x.CollegeCollegeID,
+                        principalTable: "College",
+                        principalColumn: "CollegeID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BASMenu_ProgramManager_ManagerID",
+                        column: x => x.ManagerID,
+                        principalTable: "ProgramManager",
+                        principalColumn: "ManagerID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+            migrationBuilder.CreateTable(
                 name: "ProgramEntry",
                 columns: table => new
                 {
@@ -252,19 +275,18 @@ namespace BASMockSite.Migrations
                     ProgramStructureID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ProgramDuration = table.Column<string>(nullable: false),
-                    ProgramEntryEntryID = table.Column<int>(nullable: true),
-                    ProgramEntrylID = table.Column<int>(nullable: false),
+                    ProgramEntryID = table.Column<int>(nullable: false),
                     Structure = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProgramStructure", x => x.ProgramStructureID);
                     table.ForeignKey(
-                        name: "FK_ProgramStructure_ProgramEntry_ProgramEntryEntryID",
-                        column: x => x.ProgramEntryEntryID,
+                        name: "FK_ProgramStructure_ProgramEntry_ProgramEntryID",
+                        column: x => x.ProgramEntryID,
                         principalTable: "ProgramEntry",
                         principalColumn: "EntryID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -284,6 +306,7 @@ namespace BASMockSite.Migrations
         {
             migrationBuilder.DropTable("Image");
             migrationBuilder.DropTable("ProgramStructure");
+            migrationBuilder.DropTable("BASMenu");
             migrationBuilder.DropTable("AspNetRoleClaims");
             migrationBuilder.DropTable("AspNetUserClaims");
             migrationBuilder.DropTable("AspNetUserLogins");

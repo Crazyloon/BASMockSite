@@ -42,7 +42,7 @@ namespace BASMockSite.Controllers
         // GET: ProgramStructures/Create
         public IActionResult Create()
         {
-            ViewData["ProgramEntrylID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries");
+            ViewData["ProgramEntryID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace BASMockSite.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewData["ProgramEntrylID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries", programStructure.ProgramEntrylID);
+            ViewData["ProgramEntryID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries", programStructure.ProgramEntryID);
             return View(programStructure);
         }
 
@@ -74,7 +74,7 @@ namespace BASMockSite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["ProgramEntrylID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries", programStructure.ProgramEntrylID);
+            ViewData["ProgramEntryID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries", programStructure.ProgramEntryID);
             return View(programStructure);
         }
 
@@ -89,7 +89,7 @@ namespace BASMockSite.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewData["ProgramEntrylID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries", programStructure.ProgramEntrylID);
+            ViewData["ProgramEntryID"] = new SelectList(_context.ProgramEntries, "EntryID", "ProgramEntries", programStructure.ProgramEntryID);
             return View(programStructure);
         }
 
