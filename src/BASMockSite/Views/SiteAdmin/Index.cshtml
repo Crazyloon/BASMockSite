@@ -1,0 +1,27 @@
+﻿@using BASMockSite.ViewModels.Administration
+
+@model string
+@{
+    ViewData["Title"] = "Admin Menu";
+}
+
+<div class="page-header">
+    <h2 style="text-align:center;">Welcome to the admin panel @Model</h2>
+    <p>
+        Admins - Use this page to manage roles and users, and associate users with their proper name for BAS Managers.
+    </p>
+</div>
+    
+@*@{ await Html.RenderPartialAsync("_CreateRolePartial", new CreateRoleViewModel());  }
+@{ await Html.RenderPartialAsync("_RegisterPartial", null);  }*@
+@Component.Invoke("CreateRemoveRole")
+@Component.Invoke("AddRemoveUserRole")
+@Component.Invoke("RegisterUser")
+@Component.Invoke("SetUsersManagerID")
+@*@{ await Html.RenderPartialAsync("_SetManagerIDPartial", new SetUsersManagerIDViewModel());  }
+@{ await Html.RenderPartialAsync("_RemoveUserPartial", new RemoveUserViewModel());  }*@
+
+<div style="text-align: right;">
+    <br /><br />
+    <p>Page currently in development*</p>
+</div>

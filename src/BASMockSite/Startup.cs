@@ -52,6 +52,8 @@ namespace BASMockSite
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddUserStore<UserStore<ApplicationUser, IdentityRole, ApplicationDbContext, string>>()
+                .AddRoleStore<RoleStore<IdentityRole, ApplicationDbContext, string>>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
@@ -111,7 +113,6 @@ namespace BASMockSite
 
 
             TestDataInitializer.Initialize(app.ApplicationServices);
-
             //// USE THIS FOR DEVELOPMENT PURPOSES ONLY
             //if (env.IsDevelopment())
             //{

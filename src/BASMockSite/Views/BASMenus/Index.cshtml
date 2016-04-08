@@ -4,29 +4,32 @@
     ViewData["Title"] = "BAS Manager Menu";
 }
 
-<div class="col-xs-12" style="border:2px solid black; margin-top: 24px;">
-    <p>Welcome, @User.Identity.Name</p>
-    <p>Use the options below to manage you, your college, and the degrees you manage.</p>
-    <div style="margin-top: 12px;">
-        <span style="font-weight:600">College Details <a class="tooltip-custom" data-toggle="tooltip" data-placement="right" title="Modify your colleges information"><i class="glyphicon glyphicon-question-sign"></i></a></span>
-        <br />
-        @Html.DisplayFor(m => m.College.Name) - [<a asp-action="Edit" asp-controller="Schools" asp-route-id="@Model.College.CollegeID">Edit</a>]
+@if (Model != null)
+{
+    <div class="col-xs-12" style="border:2px solid black; margin-top: 24px;">
+        <p>Welcome, @User.Identity.Name</p>
+        <p>Use the options below to manage you, your college, and the degrees you manage.</p>
+        <div style="margin-top: 12px;">
+            <span style="font-weight:600">College Details <a class="tooltip-custom" data-toggle="tooltip" data-placement="right" title="Modify your college''s information"><i class="glyphicon glyphicon-question-sign"></i></a></span>
+            <br />
+            @Html.DisplayFor(m => m.College.Name) - [<a asp-action="Edit" asp-controller="Schools" asp-route-id="@Model.College.CollegeID">Edit</a>]
+        </div>
+        <div style="margin-top: 12px;">
+            <span style="font-weight:600">Manager Details <a class="tooltip-custom" data-toggle="tooltip" data-placement="right" title="Modify your own information"><i class="glyphicon glyphicon-question-sign"></i></a></span>
+            <br />
+            @Html.DisplayFor(m => m.Manager.Name) - [<a asp-action="Edit" asp-controller="ProgramManagers" asp-route-id="@Model.Manager.ManagerID">Edit</a>]
+        </div>
+        <div style="margin-top: 12px;">
+            <span style="font-weight:600">Manage Degrees <a class="tooltip-custom" data-toggle="tooltip" data-placement="right" title="Add new degrees or manage existing"><i class="glyphicon glyphicon-question-sign"></i></a></span>
+            <br />
+            @foreach (var deg in Model.Degrees)
+            {
+                @Html.DisplayFor(m => deg.Name); <text> - [</text> @Html.ActionLink("Edit", "Edit", "Degrees", new { id = @deg.DegreeID }, null) <text>]</text>
+            }
+            <br /><br />
+        </div>
     </div>
-    <div style="margin-top: 12px;">
-        <span style="font-weight:600">Manager Details <a class="tooltip-custom" data-toggle="tooltip" data-placement="right" title="Modify your own information"><i class="glyphicon glyphicon-question-sign"></i></a></span>
-        <br />
-        @Html.DisplayFor(m => m.Manager.Name) - [<a asp-action="Edit" asp-controller="ProgramManagers" asp-route-id="@Model.Manager.ManagerID">Edit</a>]
-    </div>
-    <div style="margin-top: 12px;">
-        <span style="font-weight:600">Manage Degrees <a class="tooltip-custom" data-toggle="tooltip" data-placement="right" title="Add new degrees or manage existing"><i class="glyphicon glyphicon-question-sign"></i></a></span>
-        <br />
-        @foreach (var deg in Model.Degrees)
-        {
-            @Html.DisplayFor(m => deg.Name); <text> - [</text> @Html.ActionLink("Edit", "Edit", "Degrees", new {id = @deg.DegreeID }, null) <text>]</text>
-        }
-        <br /><br />
-    </div>
-</div>
+}
 
 @section Scripts
 {

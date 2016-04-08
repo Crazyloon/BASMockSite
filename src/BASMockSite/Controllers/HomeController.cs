@@ -33,6 +33,11 @@ namespace BASMockSite.Controllers
             return View();
         }
 
+        public IActionResult Unauthorized()
+        {
+            return View();
+        }
+
         //[HttpGet]
         //public IActionResult Search()
         //{

@@ -1,0 +1,15 @@
+﻿@using BASMockSite.ViewModels.Administration;
+@model CreateRemoveRoleViewModel
+
+<form method="post" asp-action="CreateRemoveRole" asp-controller="SiteAdmin">
+    
+    <div class="form-group row">
+        <label for="RoleName" class="col-sm-2 form-control-label">Role:</label>
+        <input asp-for="RoleName" type="text" class="form-control col-sm-10"/>
+        <small class="text-muted col-sm-offset-2 col-sm-10">Enter a role name, then select add or remove.</small>
+    </div>
+    <div class="form-group row col-sm-offset-2">
+        <input type="submit" name="btnCreateorRemove" value="Create" class="btn btn-primary" />
+        <input type="submit" name="btnCreateorRemove" value="Remove" class="btn btn-primary" />
+    </div>
+</form>

@@ -199,8 +199,10 @@ img.degree-school-logo{
     padding:0;
 }
 .college-info{
-    padding:0;
-    overflow: auto;
+    padding:14px;
+}
+.college-description{
+    padding:14px;
 }
 .college-logo{
     

@@ -8,9 +8,10 @@ using BASMockSite.Models;
 namespace BASMockSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160329230206_ApplicationUserUpdated")]
+    partial class ApplicationUserUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -21,8 +22,6 @@ namespace BASMockSite.Migrations
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
-
-                    b.Property<int>("BASManagerID");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

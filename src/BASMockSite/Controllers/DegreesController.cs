@@ -13,7 +13,7 @@ namespace BASMockSite.Controllers
 
         public DegreesController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Degrees

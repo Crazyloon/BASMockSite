@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace BASMockSite.Models
 {
@@ -10,5 +11,6 @@ namespace BASMockSite.Models
     public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
+        public int? BASManagerID { get; set; }
     }
 }

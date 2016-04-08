@@ -19,9 +19,10 @@ namespace BASMockSite.Models
             _userManager = userManager;
         }
 
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static async void Initialize(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
             var context = serviceProvider.GetService<ApplicationDbContext>();
             context.Database.Migrate();
@@ -30,6 +31,13 @@ namespace BASMockSite.Models
             //{
 
             //}
+            var role = await roleManager.FindByNameAsync("SiteAdmin");
+
+            if (role == null)
+            {
+                roleManager.CreateAsync(new IdentityRole("SiteAdmin"));
+            }
+            
 
             if (!context.Colleges.Any())
             {
