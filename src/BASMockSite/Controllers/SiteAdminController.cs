@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using BASMockSite.ViewModels.Messages;
 
 namespace BASMockSite.Controllers
 {
@@ -22,7 +23,7 @@ namespace BASMockSite.Controllers
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
 
-        public SiteAdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
+        public SiteAdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             _context = context;
             _userManager = userManager;
@@ -30,8 +31,20 @@ namespace BASMockSite.Controllers
         }
 
         // GET: AdminMenuIndex        
-        public IActionResult Index()
+        public IActionResult Index(OperationMsg opMsg)
         {
+            if (opMsg != null)
+            {
+                if (opMsg.OperationSuccessful)
+                    ViewBag.SuccessMsg = opMsg.Message;
+                else
+                    ViewBag.FailMsg = opMsg.Message;
+            }
+            else
+            {
+                ViewBag.SuccessMsg = null;
+                ViewBag.FailMsg = null;
+            }
             return View();
         }
 
@@ -46,21 +59,20 @@ namespace BASMockSite.Controllers
                 case "Create":
                     var result = await _roleManager.CreateAsync(new IdentityRole(roleName));
                     if (result.Succeeded)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                    break;
+                        return RedirectToAction("Index", new SuccessMsg("The role was created successfully."));
+                    else
+                        return RedirectToAction("Index", new FailureMsg("The role was unable to be created."));
                 case "Remove":
                     IdentityRole roleToRemove = await _roleManager.FindByNameAsync(roleName);
                     if (roleToRemove != null)
                     {
                         var removeResult = await _roleManager.DeleteAsync(roleToRemove);
                         if (removeResult.Succeeded)
-                        {
-                            return RedirectToAction("Index");
-                        }
+                            return RedirectToAction("Index", new SuccessMsg("The role was successfully deleted."));
+                        else
+                            return RedirectToAction("Index", new FailureMsg("The role was unable to be deleted."));
                     }
-                    break;
+                    return RedirectToAction("Index", new FailureMsg("The role you are trying to remove does not exist."));
             }
             return RedirectToAction("Index");
         }
@@ -92,13 +104,15 @@ namespace BASMockSite.Controllers
 
         // POST: AddUserToRole
 
+        // switching on btnAddOrRemove means that the view is tightly coupled
+        // The view must have inputs with values Add and Remove.
+        // This could potentially be refactored into multiple methods, one for each case
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddRemoveUserRole(AddRemoveUserRoleViewModel viewModel, string btnAddOrRemove)
         {            
             var user = _context.Users.Where(u => u.UserName == viewModel.UsersName).FirstOrDefault();
             var assignedRole = _context.Roles.Where(r => r.Id.ToString() == viewModel.UsersRoleID).FirstOrDefault();
-            //RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context),null,null,null,null,null);
             if (user != null && assignedRole != null)
             {
                 switch (btnAddOrRemove)
@@ -107,34 +121,27 @@ namespace BASMockSite.Controllers
                         var result = await _userManager.AddToRoleAsync(user, assignedRole.Name);
 
                         if (result.Succeeded)
-                        {
-                            return RedirectToAction("Index");
-                        }
+                            return RedirectToAction("Index", new SuccessMsg(user.UserName + " was successfully added to the role " + assignedRole.Name + "."));
                         else
-                        {
-                            // send user some sort of error message
-                        }
-                        break;
+                            return RedirectToAction("Index", new FailureMsg("The user was unable to be assigned to that role, or maybe they've already been assigned."));
                     case "Remove":
                         var removeResult = await _userManager.RemoveFromRoleAsync(user, assignedRole.Name);
 
                         if (removeResult.Succeeded)
-                        {
-                            return RedirectToAction("Index");
-                        }
+                            return RedirectToAction("Index", new SuccessMsg(user.UserName + " was successfully removed from the role " + assignedRole.Name + "."));
                         else
-                        {
-                            // send user some sort of error message
-                        }
-                        break;
+                            return RedirectToAction("Index", new FailureMsg("Unable to remove the user from this role."));
                     default:
                         break;
                 }
                 
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new FailureMsg("An unexpected error occured, be sure to select a user and a role."));
         }
 
+        // switching on btnAddOrRemove means that the view is tightly coupled
+        // The view must have inputs with values Add and Remove.
+        // This could potentially be refactored into multiple methods, one for each case
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SetUsersManagerID(SetUsersManagerIDViewModel vm, string btnAddOrRemove)
@@ -148,17 +155,31 @@ namespace BASMockSite.Controllers
                     case "Add":
                         user.BASManagerID = mgrID;
                         _context.SaveChanges();
-                        break;
+                        return RedirectToAction("Index", new SuccessMsg("The user has been associated with a BASManagerID."));
                     case "Remove":
                         user.BASManagerID = null;
                         _context.SaveChanges();
-                        break;
+                        return RedirectToAction("Index", new SuccessMsg("The user has had their BASManagerID removed."));
                     default:
                         break;
                 }
             }
+            return RedirectToAction("Index", new FailureMsg("An unexpected error occured."));
+        }
 
-            return RedirectToAction("Index");
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveUser(RemoveUserViewModel vm)
+        {
+            var user = await _userManager.FindByEmailAsync(vm.UserName);
+            if (user != null)
+            {
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index", new SuccessMsg("The user was successfully removed."));
+            }
+
+            return RedirectToAction("Index", new FailureMsg("Sorry, the user was not found, or was unabled to be deleted."));
         }
     }
 }

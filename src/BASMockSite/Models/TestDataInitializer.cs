@@ -35,7 +35,7 @@ namespace BASMockSite.Models
 
             if (role == null)
             {
-                roleManager.CreateAsync(new IdentityRole("SiteAdmin"));
+                var result = await roleManager.CreateAsync(new IdentityRole("SiteAdmin"));
             }
             
 

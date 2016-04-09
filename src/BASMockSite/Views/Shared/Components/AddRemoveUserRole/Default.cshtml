@@ -2,6 +2,7 @@
 @model AddRemoveUserRoleViewModel
 
 <form method="post" asp-action="AddRemoveUserRole" asp-controller="SiteAdmin">
+    <p class="label label-default">Add/Remove User Role</p>
     <div class="form-group row">  
         <label for="UserName" class="col-sm-2 form-control-label">User Name:</label>
         <select id="UserName" class="col-sm-10" asp-for="UsersName" asp-items="Model.Users"></select>

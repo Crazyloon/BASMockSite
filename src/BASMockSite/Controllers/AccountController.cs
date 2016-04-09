@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using BASMockSite.Models;
 using BASMockSite.Services;
 using BASMockSite.ViewModels.Account;
+using BASMockSite.ViewModels.Messages;
 
 namespace BASMockSite.Controllers
 {
@@ -137,13 +138,13 @@ namespace BASMockSite.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(nameof(SiteAdminController.Index), "SiteAdmin");
+                    return RedirectToAction(nameof(SiteAdminController.Index), "SiteAdmin", new SuccessMsg(user.UserName + " has been successfully created."));
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return RedirectToAction(nameof(SiteAdminController.Index), "SiteAdmin", new FailureMsg("Verify the integrity of the information you submited and try again."));
         }
 
         //

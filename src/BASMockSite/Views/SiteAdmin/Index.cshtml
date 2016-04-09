@@ -11,15 +11,29 @@
         Admins - Use this page to manage roles and users, and associate users with their proper name for BAS Managers.
     </p>
 </div>
-    
-@*@{ await Html.RenderPartialAsync("_CreateRolePartial", new CreateRoleViewModel());  }
-@{ await Html.RenderPartialAsync("_RegisterPartial", null);  }*@
+
+@if (ViewBag.SuccessMsg != null)
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong>
+        @ViewBag.SuccessMsg
+    </div>
+}
+else if (ViewBag.FailMsg != null)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Uh oh!</strong>
+        @ViewBag.FailMsg
+    </div>
+}
+
 @Component.Invoke("CreateRemoveRole")
 @Component.Invoke("AddRemoveUserRole")
 @Component.Invoke("RegisterUser")
 @Component.Invoke("SetUsersManagerID")
-@*@{ await Html.RenderPartialAsync("_SetManagerIDPartial", new SetUsersManagerIDViewModel());  }
-@{ await Html.RenderPartialAsync("_RemoveUserPartial", new RemoveUserViewModel());  }*@
+@Component.Invoke("RemoveUser")
 
 <div style="text-align: right;">
     <br /><br />

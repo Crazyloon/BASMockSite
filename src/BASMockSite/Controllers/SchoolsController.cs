@@ -50,6 +50,7 @@ namespace BASMockSite.Controllers
         }
 
         // GET: Schools/Create
+        [Authorize(Roles = "BASAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -85,37 +86,28 @@ namespace BASMockSite.Controllers
         // we'll check to see if that user has a matching BASManagerID associated w/ them.
         // Once we've proven that the user is a BAS Manager with a corresponding BASManagerID for the college,
         // Well provide a view with the information for that college which can be edited.
-        [Authorize]
+        [Authorize(Roles = "BASAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
-
-            College school = null;
+            
             if (id != null)
             {
                 ApplicationUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-                if (user == null)
-                    return RedirectToAction("Unauthorized", "Home", null);
+                College college = collegeRepo.GetInclude((int)id, c => c.ProgramManagers);
+                ProgramManager progManager = college.ProgramManagers.Where(pm => pm.Email == user.Email).SingleOrDefault();
                 
-                int? BASManagerID = user.BASManagerID; /*_context.Users.Where(u => u.Email == userEmail).SingleOrDefault().BASManagerID;*/
-                if (!BASManagerID.HasValue)
-                    return RedirectToAction("Unauthorized", "Home", null);
 
-                school = collegeRepo.GetInclude((int)id, c => c.ProgramManagers);
-                if (school == null)
-                    return HttpNotFound();
-
-                ProgramManager progManager = school.ProgramManagers.Where(pm => pm.Email == user.Email).SingleOrDefault();
-                if (progManager == null)
+                if (IsUserCollegesProgramManager(user, college, progManager))
                 {
-                    return RedirectToAction("Unauthorized", "Home", null);
+                    return View(college);
                 }
-                else if (progManager.ManagerID == (int)BASManagerID)
+                else
                 {
-                    return View(school);
+                    return RedirectToAction("Unauthorized", "Home", null);
                 }
 
             }
@@ -127,7 +119,7 @@ namespace BASMockSite.Controllers
 
         // POST: Schools/Edit/5
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "BASAdmin")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(College school, IFormFile logo)
         {
@@ -143,25 +135,32 @@ namespace BASMockSite.Controllers
 
         // GET: Schools/Delete/5
         [ActionName("Delete")]
-        public IActionResult Delete(int? id)
+        [Authorize(Roles = "BASAdmin")]
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            College school = _context.Colleges.Single(m => m.CollegeID == id);
-            if (school == null)
+            ApplicationUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            College college = collegeRepo.GetInclude((int)id, c => c.ProgramManagers);
+            ProgramManager progManager = college.ProgramManagers.Where(pm => pm.Email == user.Email).SingleOrDefault();
+            
+            if (IsUserCollegesProgramManager(user, college, progManager))
             {
-                return HttpNotFound();
+                return View(college);
             }
-
-            return View(school);
+            else
+            {
+                return RedirectToAction("Unauthorized", "Home", null);
+            }
         }
 
         // POST: Schools/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "BASAdmin")]
         public IActionResult DeleteConfirmed(int id)
         {
             College school = _context.Colleges.Single(m => m.CollegeID == id);
@@ -170,10 +169,35 @@ namespace BASMockSite.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Determines if the user is associated with the college's program manager in the database.
+        /// </summary>
+        /// <param name="user">The current ApplicationUser.</param>
+        /// <param name="college">The college with a potentially matching program manager.</param>
+        /// <param name="pm">The ProgramManager we're trying to match to the college</param>
+        /// <returns>Returns true if the User is the ProgramManager for the College. Returns false if not. Returns false if any of the arguments are null, or if the user does not have a BASManagerID</returns>
+        private bool IsUserCollegesProgramManager(ApplicationUser user, College college, ProgramManager pm)
+        {
+            // Potentially refactor to throw an error instead of just returning false
+            if (user == null || college == null || pm == null)
+                return false;
+
+            int? BASManagerID = user.BASManagerID;
+            if (!BASManagerID.HasValue)
+                return false;
+
+            if (pm.ManagerID == (int)BASManagerID && college.CollegeID == pm.CollegeID)
+            {
+                return true;
+            }
+            
+            return false;
+        }
+
         public FileContentResult GetSchoolLogo(int schoolID)
         {
             College school = _context.Colleges.Where(s => s.CollegeID == schoolID).SingleOrDefault();
-            if (school.Logo != null)
+            if (school != null && school.Logo != null)
             {
                 return new FileContentResult(school.Logo, "image/jpeg");
             }
